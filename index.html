@@ -8,10 +8,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
+    <meta name="description" content="Download ready-to-install, pre-patched YouTube Morphe APKs instantly. Virus-free, clean builds directly from the official patcher.">
+    <meta name="keywords" content="Morphe patcher, YouTube pre-patched, Morphe APK download, patched YouTube APK, adblock YouTube android, youtube mod, youtube mod apk, youtube vanced alternative, youtube revanced alternative, youtube no ads apk, youtube background play apk, modified youtube app, premium youtube free apk, premium youtube mod, client for youtube android">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://youtubepatched.nirfahost.my.id/">
     <style>
         :root {
-            /* Material 3 Expressive Theme Tokens */
+            /* Material 3 Expressive Light Theme Tokens */
             --md-sys-color-primary: #385a92;
             --md-sys-color-on-primary: #ffffff;
             --md-sys-color-primary-container: #d6e3ff;
@@ -37,12 +40,40 @@
             --md-sys-color-outline-variant: #c4c6d0;
         }
 
+        [data-theme="dark"] {
+            /* Material 3 Expressive Dark Theme Tokens */
+            --md-sys-color-primary: #a5c8ff;
+            --md-sys-color-on-primary: #002f66;
+            --md-sys-color-primary-container: #1c4279;
+            --md-sys-color-on-primary-container: #d6e3ff;
+            
+            --md-sys-color-secondary: #bfc6dc;
+            --md-sys-color-on-secondary: #283141;
+            --md-sys-color-secondary-container: #3d4758;
+            --md-sys-color-on-secondary-container: #dae2f9;
+
+            --md-sys-color-tertiary: #dcbdff;
+            --md-sys-color-on-tertiary: #3e274f;
+            --md-sys-color-tertiary-container: #563d66;
+            --md-sys-color-on-tertiary-container: #f9d8fd;
+
+            --md-sys-color-background: #111318;
+            --md-sys-color-on-background: #e2e2e9;
+            --md-sys-color-surface: #111318;
+            --md-sys-color-surface-container: #1a1c22;
+            --md-sys-color-surface-container-high: #242a32;
+            
+            --md-sys-color-outline: #8e9099;
+            --md-sys-color-outline-variant: #44474f;
+        }
+
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             margin: 0;
             background-color: var(--md-sys-color-background);
             color: var(--md-sys-color-on-background);
             -webkit-font-smoothing: antialiased;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         /* Top App Bar */
@@ -53,6 +84,7 @@
             top: 0;
             z-index: 100;
             border-bottom: 1px solid var(--md-sys-color-outline-variant);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
         }
 
         .nav-container {
@@ -61,6 +93,7 @@
             padding: 0 24px;
             display: flex;
             align-items: center;
+            justify-content: space-between;
         }
 
         .brand {
@@ -78,6 +111,35 @@
             height: 12px;
             background-color: var(--md-sys-color-primary);
             border-radius: 50%;
+        }
+
+        /* Theme Switcher Button */
+        .theme-toggle-btn {
+            background: none;
+            border: 1px solid var(--md-sys-color-outline-variant);
+            padding: 10px;
+            border-radius: 100px;
+            cursor: pointer;
+            color: var(--md-sys-color-on-background);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.2s ease, border-color 0.2s ease;
+        }
+
+        .theme-toggle-btn:hover {
+            background-color: var(--md-sys-color-surface-container);
+        }
+
+        .theme-toggle-icon {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        [data-theme="dark"] .theme-toggle-icon.icon-sun,
+        html:not([data-theme="dark"]) .theme-toggle-icon.icon-moon {
+            display: none;
         }
 
         .container {
@@ -113,28 +175,28 @@
         }
 
         .official-link-wrapper {
-            display: inline-block; /* Allows standard word text-wrapping rules */
+            display: inline-block;
             text-align: center;
             font-size: 0.95rem;
             color: var(--md-sys-color-secondary);
             background: var(--md-sys-color-surface-container);
             padding: 12px 24px;
-            border-radius: 24px; /* Clean rounded edges that scale beautifully */
+            border-radius: 24px;
             font-weight: 500;
             line-height: 1.6;
-            max-width: 100%; /* Prevents horizontal clipping on ultra-small screens */
+            max-width: 100%;
             box-sizing: border-box;
+            transition: background-color 0.3s ease;
         }
 
         .official-link {
             color: var(--md-sys-color-primary);
             text-decoration: none;
             font-weight: 700;
-            display: inline-inline; /* Ensures it behaves as standard inline text */
-            white-space: nowrap; /* Forces 'here' and the icon to stick together on one line */
-            transition: opacity 0.2s ease;
+            display: inline-block;
+            white-space: nowrap;
+            transition: opacity 0.2s ease, color 0.3s ease;
         }
-
 
         .official-link:hover {
             text-decoration: underline;
@@ -147,14 +209,14 @@
             fill: currentColor;
             display: inline-block;
             vertical-align: middle;
-            margin-top: -2px; /* Keeps the material icon geometrically centered with text */
+            margin-top: -2px;
             margin-left: 2px;
         }
 
         /* M3 Grid Layout */
         .download-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
             gap: 24px;
         }
 
@@ -166,7 +228,7 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            transition: transform 0.2s cubic-bezier(0.2, 0, 0, 1), background-color 0.2s ease;
+            transition: transform 0.2s cubic-bezier(0.2, 0, 0, 1), background-color 0.3s ease;
         }
 
         .apk-card:hover {
@@ -188,12 +250,14 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            transition: background-color 0.3s ease;
         }
 
         .card-icon {
             width: 28px;
             height: 28px;
             fill: var(--md-sys-color-on-primary-container);
+            transition: fill 0.3s ease;
         }
 
         .card-title {
@@ -220,6 +284,7 @@
             background: var(--md-sys-color-secondary-container);
             padding: 4px 12px;
             border-radius: 8px;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         .card-meta-patch {
@@ -229,15 +294,7 @@
             background: var(--md-sys-color-tertiary-container);
             padding: 4px 12px;
             border-radius: 8px;
-        }
-
-        .card-meta-arch {
-            font-size: 0.8rem;
-            font-weight: 700;
-            color: var(--md-sys-color-on-background);
-            background: var(--md-sys-color-outline-variant);
-            padding: 4px 12px;
-            border-radius: 8px;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         .card-body-text {
@@ -248,45 +305,68 @@
             font-weight: 500;
         }
 
+        /* Isolated File Architecture Block */
+        .file-section {
+            background-color: var(--md-sys-color-surface);
+            border: 1px solid var(--md-sys-color-outline-variant);
+            border-radius: 20px;
+            padding: 16px;
+            margin-top: 16px;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .file-section-title {
+            font-size: 0.85rem;
+            font-weight: 800;
+            color: var(--md-sys-color-primary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
         .hash-container {
-            margin-top: 20px;
+            margin-top: 14px;
             display: flex;
             flex-direction: column;
-            gap: 14px;
+            gap: 10px;
         }
 
         .hash-wrapper {
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 4px;
         }
 
         .hash-title {
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.7px;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             color: var(--md-sys-color-outline);
         }
 
         .hash-value {
             font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-            background-color: var(--md-sys-color-surface);
+            background-color: var(--md-sys-color-surface-container);
             color: var(--md-sys-color-on-background);
             padding: 8px 12px;
-            border-radius: 12px;
+            border-radius: 10px;
             border: 1px solid var(--md-sys-color-outline-variant);
             word-break: break-all;
             user-select: all;
             font-size: 0.75rem;
+            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
         }
         
-        /* Actions - Pill Shapes */
+        /* Actions - Buttons scaled inside architecture box */
         .card-actions {
             display: flex;
             flex-direction: column;
-            gap: 10px;
-            margin-top: 32px;
+            gap: 8px;
+            margin-top: 12px;
         }
 
         .download-btn {
@@ -295,11 +375,11 @@
             justify-content: center;
             gap: 8px;
             text-decoration: none;
-            padding: 14px 24px;
+            padding: 12px 20px;
             border-radius: 100px;
             font-weight: 700;
-            font-size: 0.95rem;
-            transition: filter 0.2s ease, opacity 0.2s ease;
+            font-size: 0.9rem;
+            transition: filter 0.2s ease, opacity 0.2s ease, background-color 0.3s ease, color 0.3s ease;
             cursor: pointer;
             box-sizing: border-box;
             width: 100%;
@@ -307,6 +387,10 @@
 
         .download-btn:hover {
             filter: brightness(0.92);
+        }
+
+        [data-theme="dark"] .download-btn:hover {
+            filter: brightness(1.15);
         }
 
         .btn-direct {
@@ -322,11 +406,12 @@
         .btn-ad {
             background-color: var(--md-sys-color-tertiary-container);
             color: var(--md-sys-color-on-tertiary-container);
+            margin-top: 20px;
         }
 
         .btn-icon {
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
             fill: currentColor;
         }
 
@@ -347,6 +432,10 @@
                 <div class="brand-dot"></div>
                 Youtube Morphe Pre-Patched
             </div>
+            <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle dark mode">
+                <svg class="theme-toggle-icon icon-sun" viewBox="0 0 24 24"><path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58c-.39-.39-1.03-.39-1.41 0s-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37c-.39-.39-1.03-.39-1.41 0s-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41l-1.06-1.06zm1.06-12.37c-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06c.39-.38.39-1.02 0-1.41zm-12.37 12.37c-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06c.38-.38.38-1.02 0-1.41z"/></svg>
+                <svg class="theme-toggle-icon icon-moon" viewBox="0 0 24 24"><path d="M12.3 22h-.1c-5.4 0-9.8-4.5-9.8-10s4.4-10 9.9-10c.5 0 .9.3 1.1.7.2.4.1.9-.2 1.2-1.9 1.8-3 4.3-3 7s1.1 5.2 3 7c.3.3.4.8.2 1.2-.2.5-.7.9-1.1.9zm.6-17.7c-2.3 1.6-3.7 4.2-3.7 7.1s1.4 5.5 3.8 7.1c-.8.1-1.6.2-2.4.2-4.3 0-7.8-3.6-7.8-8s3.5-8 7.8-8c.8 0 1.6.1 2.3.3z"/></svg>
+            </button>
         </div>
     </header>
 
@@ -371,12 +460,33 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
     
     <script>
+        // Theme Toggle Script
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const currentTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+
+        if (currentTheme === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            let theme = document.documentElement.getAttribute('data-theme');
+            if (theme === 'dark') {
+                document.documentElement.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'light');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+
+        // Dynamic File Engine Script
         const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR-90ZXL1hra4KgDJClg6_4x-LK9zn64KslBHS1P7U6zGOXKtKojQWjlKha9bPggppyYn_RMrT0Xe1h/pub?gid=0&single=true&output=csv';
 
         const icons = {
             download: `<svg class="btn-icon" viewBox="0 0 24 24"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>`,
-            mirror: `<svg class="btn-icon" viewBox="0 0 24 24"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31( 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/></svg>`,
-            heart: `<svg class="btn-icon" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>`
+            mirror: `<svg class="btn-icon" viewBox="0 0 24 24"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/></svg>`,
+            heart: `<svg class="btn-icon" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>`,
+            device: `<svg style="width:16px; height:16px; fill:currentColor;" viewBox="0 0 24 24"><path d="M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14z"/></svg>`
         };
 
         Papa.parse(sheetUrl, {
@@ -389,75 +499,88 @@
                 loadingText.style.display = 'none';
 
                 results.data.forEach(app => {
-                    if (!app.AppName || !app.AppName.trim()) return; 
+                    if (!app.AppName || !app.AppName.trim()) return;
 
-                    let buttonsHTML = '';
+                    // Cleanly break up comma-separated values into lists
+                    const architectures = app.Architecture ? app.Architecture.split(',').map(s => s.trim()) : ['Universal'];
+                    const directLinks = app.DownloadLink ? app.DownloadLink.split(',').map(s => s.trim()) : [];
+                    const mirrorLinks = app.MirrorLink ? app.MirrorLink.split(',').map(s => s.trim()) : [];
+                    const md5Hashes = app.MD5 ? app.MD5.split(',').map(s => s.trim()) : [];
+                    const sha256Hashes = app.SHA256 ? app.SHA256.split(',').map(s => s.trim()) : [];
 
-                    if (app.DownloadLink && app.DownloadLink.trim() !== '') {
-                        buttonsHTML += `
-                            <a href="${app.DownloadLink.trim()}" class="download-btn btn-direct" target="_blank">
-                                ${icons.download} Direct Download
-                            </a>
+                    let fileSectionsHTML = '';
+
+                    // Generate a dedicated layout section per parsed variant
+                    architectures.forEach((arch, index) => {
+                        let buttonsHTML = '';
+                        let hashesHTML = '';
+
+                        if (directLinks[index]) {
+                            buttonsHTML += `
+                                <a href="${directLinks[index]}" class="download-btn btn-direct" target="_blank">
+                                    ${icons.download} Direct Download
+                                </a>
+                            `;
+                        }
+
+                        if (mirrorLinks[index]) {
+                            buttonsHTML += `
+                                <a href="${mirrorLinks[index]}" class="download-btn btn-mirror" target="_blank">
+                                    ${icons.mirror} Mirror Link
+                                </a>
+                            `;
+                        }
+
+                        let md5Block = '';
+                        if (md5Hashes[index]) {
+                            md5Block = `
+                                <div class="hash-wrapper">
+                                    <span class="hash-title">MD5 Checksum</span>
+                                    <div class="hash-value" title="Double click to copy">${md5Hashes[index]}</div>
+                                </div>
+                            `;
+                        }
+
+                        let sha256Block = '';
+                        if (sha256Hashes[index]) {
+                            sha256Block = `
+                                <div class="hash-wrapper">
+                                    <span class="hash-title">SHA-256 Checksum</span>
+                                    <div class="hash-value" title="Double click to copy">${sha256Hashes[index]}</div>
+                                </div>
+                            `;
+                        }
+
+                        if (md5Block || sha256Block) {
+                            hashesHTML = `<div class="hash-container">${md5Block}${sha256Block}</div>`;
+                        }
+
+                        fileSectionsHTML += `
+                            <div class="file-section">
+                                <div class="file-section-title">
+                                    ${icons.device} ${arch} Variant
+                                </div>
+                                <div class="card-actions">
+                                    ${buttonsHTML}
+                                </div>
+                                ${hashesHTML}
+                            </div>
                         `;
-                    }
+                    });
 
-                    if (app.MirrorLink && app.MirrorLink.trim() !== '') {
-                        buttonsHTML += `
-                            <a href="${app.MirrorLink.trim()}" class="download-btn btn-mirror" target="_blank">
-                                ${icons.mirror} Mirror Link
-                            </a>
-                        `;
-                    }
-
+                    // Build global support block if provided
+                    let supportButtonHTML = '';
                     if (app.AdLink && app.AdLink.trim() !== '') {
-                        buttonsHTML += `
+                        supportButtonHTML += `
                             <a href="${app.AdLink.trim()}" class="download-btn btn-ad" target="_blank">
                                 ${icons.heart} Support Me
                             </a>
                         `;
                     }
 
-                    let hashesHTML = '';
-                    let md5Block = '';
-                    let sha256Block = '';
-
-                    if (app.MD5 && app.MD5.trim() !== '') {
-                        md5Block = `
-                            <div class="hash-wrapper">
-                                <span class="hash-title">MD5 Checksum</span>
-                                <div class="hash-value" title="Double click or long press to copy hash">${app.MD5.trim()}</div>
-                            </div>
-                        `;
-                    }
-
-                    if (app.SHA256 && app.SHA256.trim() !== '') {
-                        sha256Block = `
-                            <div class="hash-wrapper">
-                                <span class="hash-title">SHA-256 Checksum</span>
-                                <div class="hash-value" title="Double click or long press to copy hash">${app.SHA256.trim()}</div>
-                            </div>
-                        `;
-                    }
-
-                    if (md5Block || sha256Block) {
-                        hashesHTML = `
-                            <div class="hash-container">
-                                ${md5Block}
-                                ${sha256Block}
-                            </div>
-                        `;
-                    }
-
-                    // Build Patch Version badge dynamically if data exists
                     let patchMetaHTML = '';
                     if (app.PatchVersion && app.PatchVersion.trim() !== '') {
                         patchMetaHTML = `<div class="card-meta-patch">Patch v${app.PatchVersion.trim()}</div>`;
-                    }
-
-                    // Build Architecture badge dynamically if data exists
-                    let archMetaHTML = '';
-                    if (app.Architecture && app.Architecture.trim() !== '') {
-                        archMetaHTML = `<div class="card-meta-arch">${app.Architecture.trim()}</div>`;
                     }
 
                     const cardHTML = `
@@ -472,16 +595,16 @@
                                         <div class="card-meta-container">
                                             <div class="card-meta">v${app.Version}</div>
                                             ${patchMetaHTML}
-                                            ${archMetaHTML}
                                         </div>
                                     </div>
                                 </div>
                                 <p class="card-body-text">${app.Description}</p>
-                                ${hashesHTML}
+                                
+                                ${fileSectionsHTML}
                             </div>
                             
-                            <div class="card-actions">
-                                ${buttonsHTML}
+                            <div>
+                                ${supportButtonHTML}
                             </div>
                         </section>
                     `;
@@ -490,7 +613,7 @@
                 });
             },
             error: function(err) {
-                document.getElementById('loading').innerText = "Error syncing apps. Please check the spreadsheet configuration.";
+                document.getElementById('loading').innerText = "Error syncing apps. Please check spreadsheet configuration.";
                 console.error(err);
             }
         });
