@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Morphe Pre-Patched</title>
+    <title>Morphe Pre-Patched – Download Patched YouTube APKs</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,12 +32,14 @@
 
             --md-sys-color-background: #f9f9fc;
             --md-sys-color-on-background: #191c20;
-            --md-sys-color-surface: #f9f9fc;
+            --md-sys-color-surface: #ffffff;
             --md-sys-color-surface-container: #f0f3f8;
             --md-sys-color-surface-container-high: #e2e7ec;
             
             --md-sys-color-outline: #74777f;
             --md-sys-color-outline-variant: #c4c6d0;
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.04);
+            --shadow-md: 0 8px 24px rgba(56, 90, 146, 0.06);
         }
 
         [data-theme="dark"] {
@@ -57,14 +59,16 @@
             --md-sys-color-tertiary-container: #563d66;
             --md-sys-color-on-tertiary-container: #f9d8fd;
 
-            --md-sys-color-background: #111318;
+            --md-sys-color-background: #0f1115;
             --md-sys-color-on-background: #e2e2e9;
-            --md-sys-color-surface: #111318;
-            --md-sys-color-surface-container: #1a1c22;
-            --md-sys-color-surface-container-high: #242a32;
+            --md-sys-color-surface: #16181d;
+            --md-sys-color-surface-container: #1b1f26;
+            --md-sys-color-surface-container-high: #252a33;
             
             --md-sys-color-outline: #8e9099;
-            --md-sys-color-outline-variant: #44474f;
+            --md-sys-color-outline-variant: #33373f;
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.2);
+            --shadow-md: 0 8px 24px rgba(0,0,0,0.3);
         }
 
         body {
@@ -84,11 +88,12 @@
             top: 0;
             z-index: 100;
             border-bottom: 1px solid var(--md-sys-color-outline-variant);
-            transition: background-color 0.3s ease, border-color 0.3s ease;
+            box-shadow: var(--shadow-sm);
+            transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
         }
 
         .nav-container {
-            max-width: 1040px;
+            max-width: 1100px;
             margin: 0 auto;
             padding: 0 24px;
             display: flex;
@@ -97,7 +102,7 @@
         }
 
         .brand {
-            font-size: 1.35rem;
+            font-size: 1.4rem;
             font-weight: 800;
             letter-spacing: -0.5px;
             display: flex;
@@ -111,10 +116,17 @@
             height: 12px;
             background-color: var(--md-sys-color-primary);
             border-radius: 50%;
+            box-shadow: 0 0 10px var(--md-sys-color-primary);
         }
 
-        /* Theme Switcher Button */
-        .theme-toggle-btn {
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* Selector Controls Styling */
+        .control-btn {
             background: none;
             border: 1px solid var(--md-sys-color-outline-variant);
             padding: 10px;
@@ -124,11 +136,21 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: background-color 0.2s ease, border-color 0.2s ease;
+            transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
         }
 
-        .theme-toggle-btn:hover {
+        .control-btn:hover {
             background-color: var(--md-sys-color-surface-container);
+            transform: scale(1.05);
+        }
+
+        .lang-select-btn {
+            font-family: inherit;
+            font-size: 0.85rem;
+            font-weight: 700;
+            padding: 10px 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .theme-toggle-icon {
@@ -143,34 +165,34 @@
         }
 
         .container {
-            max-width: 1040px;
-            margin: 54px auto;
+            max-width: 1100px;
+            margin: 64px auto;
             padding: 0 24px;
         }
 
         /* Expressive Header Block */
         .header-text {
             text-align: center;
-            margin-bottom: 56px;
-            max-width: 720px;
+            margin-bottom: 64px;
+            max-width: 760px;
             margin-left: auto;
             margin-right: auto;
         }
 
         .header-text h2 {
-            font-size: 2.75rem;
+            font-size: 3rem;
             font-weight: 800;
             letter-spacing: -1.5px;
-            margin: 0 0 16px 0;
+            margin: 0 0 20px 0;
             color: var(--md-sys-color-on-background);
             line-height: 1.15;
         }
 
         .header-text p {
             color: var(--md-sys-color-secondary);
-            font-size: 1.1rem;
-            line-height: 1.6;
-            margin: 0 0 16px 0;
+            font-size: 1.15rem;
+            line-height: 1.65;
+            margin: 0 0 28px 0;
             font-weight: 500;
         }
 
@@ -180,12 +202,13 @@
             font-size: 0.95rem;
             color: var(--md-sys-color-secondary);
             background: var(--md-sys-color-surface-container);
-            padding: 12px 24px;
-            border-radius: 24px;
+            padding: 14px 28px;
+            border-radius: 30px;
             font-weight: 500;
             line-height: 1.6;
             max-width: 100%;
             box-sizing: border-box;
+            border: 1px solid var(--md-sys-color-outline-variant);
             transition: background-color 0.3s ease;
         }
 
@@ -193,8 +216,9 @@
             color: var(--md-sys-color-primary);
             text-decoration: none;
             font-weight: 700;
-            display: inline-block;
-            white-space: nowrap;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
             transition: opacity 0.2s ease, color 0.3s ease;
         }
 
@@ -204,49 +228,48 @@
         }
 
         .official-link-icon {
-            width: 14px;
-            height: 14px;
+            width: 16px;
+            height: 16px;
             fill: currentColor;
             display: inline-block;
-            vertical-align: middle;
-            margin-top: -2px;
-            margin-left: 2px;
         }
 
         /* M3 Grid Layout */
         .download-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-            gap: 24px;
+            gap: 32px;
         }
 
         /* Expressive Cards - Large Radius */
         .apk-card {
-            background: var(--md-sys-color-surface-container);
+            background: var(--md-sys-color-surface);
+            border: 1px solid var(--md-sys-color-outline-variant);
             border-radius: 28px;
             padding: 32px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            transition: transform 0.2s cubic-bezier(0.2, 0, 0, 1), background-color 0.3s ease;
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.3s cubic-bezier(0.2, 0, 0, 1), background-color 0.3s ease, box-shadow 0.3s ease;
         }
 
         .apk-card:hover {
-            transform: scale(1.015);
-            background: var(--md-sys-color-surface-container-high);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
         }
 
         .card-header {
             display: flex;
             align-items: center;
             gap: 16px;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
         }
 
         .card-icon-wrapper {
             background-color: var(--md-sys-color-primary-container);
-            padding: 12px;
-            border-radius: 16px;
+            padding: 14px;
+            border-radius: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -254,15 +277,15 @@
         }
 
         .card-icon {
-            width: 28px;
-            height: 28px;
+            width: 32px;
+            height: 32px;
             fill: var(--md-sys-color-on-primary-container);
             transition: fill 0.3s ease;
         }
 
         .card-title {
             margin: 0;
-            font-size: 1.35rem;
+            font-size: 1.4rem;
             font-weight: 700;
             letter-spacing: -0.4px;
             color: var(--md-sys-color-on-background);
@@ -273,8 +296,8 @@
         .card-meta-container {
             display: flex;
             flex-wrap: wrap;
-            gap: 6px;
-            margin-top: 6px;
+            gap: 8px;
+            margin-top: 8px;
         }
 
         .card-meta {
@@ -299,7 +322,7 @@
 
         .card-body-text {
             color: var(--md-sys-color-secondary);
-            font-size: 0.95rem;
+            font-size: 1rem;
             line-height: 1.6;
             margin: 0 0 24px 0;
             font-weight: 500;
@@ -307,11 +330,11 @@
 
         /* Isolated File Architecture Block */
         .file-section {
-            background-color: var(--md-sys-color-surface);
-            border: 1px solid var(--md-sys-color-outline-variant);
+            background-color: var(--md-sys-color-surface-container);
+            border: 1px solid transparent;
             border-radius: 20px;
-            padding: 16px;
-            margin-top: 16px;
+            padding: 20px;
+            margin-top: 18px;
             transition: background-color 0.3s ease, border-color 0.3s ease;
         }
 
@@ -320,24 +343,24 @@
             font-weight: 800;
             color: var(--md-sys-color-primary);
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 12px;
+            letter-spacing: 0.7px;
+            margin-bottom: 14px;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
         }
 
         .hash-container {
-            margin-top: 14px;
+            margin-top: 16px;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
         }
 
         .hash-wrapper {
             display: flex;
             flex-direction: column;
-            gap: 4px;
+            gap: 6px;
         }
 
         .hash-title {
@@ -350,9 +373,9 @@
 
         .hash-value {
             font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-            background-color: var(--md-sys-color-surface-container);
+            background-color: var(--md-sys-color-surface-container-high);
             color: var(--md-sys-color-on-background);
-            padding: 8px 12px;
+            padding: 10px 12px;
             border-radius: 10px;
             border: 1px solid var(--md-sys-color-outline-variant);
             word-break: break-all;
@@ -365,7 +388,7 @@
         .card-actions {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 10px;
             margin-top: 12px;
         }
 
@@ -375,14 +398,18 @@
             justify-content: center;
             gap: 8px;
             text-decoration: none;
-            padding: 12px 20px;
+            padding: 14px 20px;
             border-radius: 100px;
             font-weight: 700;
-            font-size: 0.9rem;
-            transition: filter 0.2s ease, opacity 0.2s ease, background-color 0.3s ease, color 0.3s ease;
+            font-size: 0.95rem;
+            transition: filter 0.2s ease, opacity 0.2s ease, background-color 0.3s ease, color 0.3s ease, transform 0.1s ease;
             cursor: pointer;
             box-sizing: border-box;
             width: 100%;
+        }
+
+        .download-btn:active {
+            transform: scale(0.98);
         }
 
         .download-btn:hover {
@@ -390,7 +417,7 @@
         }
 
         [data-theme="dark"] .download-btn:hover {
-            filter: brightness(1.15);
+            filter: brightness(1.12);
         }
 
         .btn-direct {
@@ -401,12 +428,13 @@
         .btn-mirror {
             background-color: var(--md-sys-color-secondary-container);
             color: var(--md-sys-color-on-secondary-container);
+            border: 1px solid var(--md-sys-color-outline-variant);
         }
 
         .btn-ad {
             background-color: var(--md-sys-color-tertiary-container);
             color: var(--md-sys-color-on-tertiary-container);
-            margin-top: 20px;
+            margin-top: 24px;
         }
 
         .btn-icon {
@@ -419,8 +447,8 @@
             text-align: center;
             font-weight: 600;
             color: var(--md-sys-color-secondary);
-            padding: 48px 0;
-            font-size: 1.1rem;
+            padding: 64px 0;
+            font-size: 1.2rem;
         }
     </style>
 </head>
@@ -430,23 +458,26 @@
         <div class="nav-container">
             <div class="brand">
                 <div class="brand-dot"></div>
-                Youtube Morphe Pre-Patched
+                YouTube Morphe Pre-Patched
             </div>
-            <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle dark mode">
-                <svg class="theme-toggle-icon icon-sun" viewBox="0 0 24 24"><path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58c-.39-.39-1.03-.39-1.41 0s-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37c-.39-.39-1.03-.39-1.41 0s-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41l-1.06-1.06zm1.06-12.37c-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06c.39-.38.39-1.02 0-1.41zm-12.37 12.37c-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06c.38-.38.38-1.02 0-1.41z"/></svg>
-                <svg class="theme-toggle-icon icon-moon" viewBox="0 0 24 24"><path d="M12.3 22h-.1c-5.4 0-9.8-4.5-9.8-10s4.4-10 9.9-10c.5 0 .9.3 1.1.7.2.4.1.9-.2 1.2-1.9 1.8-3 4.3-3 7s1.1 5.2 3 7c.3.3.4.8.2 1.2-.2.5-.7.9-1.1.9zm.6-17.7c-2.3 1.6-3.7 4.2-3.7 7.1s1.4 5.5 3.8 7.1c-.8.1-1.6.2-2.4.2-4.3 0-7.8-3.6-7.8-8s3.5-8 7.8-8c.8 0 1.6.1 2.3.3z"/></svg>
-            </button>
+            <div class="nav-actions">
+                <button class="control-btn lang-select-btn" id="lang-toggle" aria-label="Switch Language">ID</button>
+                <button class="control-btn" id="theme-toggle" aria-label="Toggle dark mode">
+                    <svg class="theme-toggle-icon icon-sun" viewBox="0 0 24 24"><path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58c-.39-.39-1.03-.39-1.41 0s-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37c-.39-.39-1.03-.39-1.41 0s-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41l-1.06-1.06zm1.06-12.37c-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06c.39-.38.39-1.02 0-1.41zm-12.37 12.37c-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06c.38-.38.38-1.02 0-1.41z"/></svg>
+                    <svg class="theme-toggle-icon icon-moon" viewBox="0 0 24 24"><path d="M12.3 22h-.1c-5.4 0-9.8-4.5-9.8-10s4.4-10 9.9-10c.5 0 .9.3 1.1.7.2.4.1.9-.2 1.2-1.9 1.8-3 4.3-3 7s1.1 5.2 3 7c.3.3.4.8.2 1.2-.2.5-.7.9-1.1.9zm.6-17.7c-2.3 1.6-3.7 4.2-3.7 7.1s1.4 5.5 3.8 7.1c-.8.1-1.6.2-2.4.2-4.3 0-7.8-3.6-7.8-8s3.5-8 7.8-8c.8 0 1.6.1 2.3.3z"/></svg>
+                </button>
+            </div>
         </div>
     </header>
 
     <div class="container">
         <div class="header-text">
-            <h2>Pre-Patched Downloads</h2>
-            <p>Can't patch it yourself? Grab a ready-to-install, patched APK instantly. There are no viruses or suspicious code—just an application patched directly from Morphe Patcher using the default settings. Skip the hassle and start using it right away!</p>
+            <h2 id="hero-title">Pre-Patched Downloads</h2>
+            <p id="hero-desc">Can't patch it yourself? Grab a ready-to-install, patched APK instantly. There are no viruses or suspicious code—just an application patched directly from Morphe Patcher using the default settings. Skip the hassle and start using it right away!</p>
             <div class="official-link-wrapper">
-                You can patch it yourself from the official website 
+                <span id="hero-alt">You can patch it yourself from the official website </span>
                 <a href="https://morphe.software" class="official-link" target="_blank">
-                    here
+                    <span id="hero-link-text">here</span>
                     <svg class="official-link-icon" viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>
                 </a>
             </div>
@@ -460,6 +491,48 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
     
     <script>
+        // Localization Engine Setup
+        const locales = {
+            en: {
+                heroTitle: "Pre-Patched Downloads",
+                heroDesc: "Can't patch it yourself? Grab a ready-to-install, patched APK instantly. There are no viruses or suspicious code—just an application patched directly from Morphe Patcher using the default settings. Skip the hassle and start using it right away!",
+                heroAlt: "You can patch it yourself from the official website ",
+                heroLinkText: "here",
+                loading: "Loading applications...",
+                error: "Error syncing apps. Please check spreadsheet configuration.",
+                variant: "Variant",
+                copyTooltip: "Double click to copy",
+                supportBtn: "Support Me",
+                directBtn: "Direct Download",
+                mirrorBtn: "Mirror Link"
+            },
+            id: {
+                heroTitle: "Download Pre-Patched",
+                heroDesc: "Malas melakukan patching sendiri? Dapatkan APK pre-patched yang aman dan siap pasang secara instan. Tanpa malware ataupun skrip mencurigakan—semua build bersih ini dikompilasi langsung via Morphe Patcher menggunakan konfigurasi default. Lewati proses ribet dan langsung gunakan aplikasinya!",
+                heroAlt: "Atau, Anda bisa melakukan patch secara manual melalui situs resmi mereka ",
+                heroLinkText: "di sini",
+                loading: "Memuat aplikasi...",
+                error: "Gagal memuat aplikasi. Silakan periksa konfigurasi spreadsheet Anda.",
+                variant: "Varian",
+                copyTooltip: "Klik ganda untuk menyalin",
+                supportBtn: "Dukung Saya (Support Me)",
+                directBtn: "Direct Download",
+                mirrorBtn: "Mirror Link"
+            }
+        };
+
+        let currentLang = localStorage.getItem('lang') || 'en';
+        let parsedAppData = []; // Cache to allow localized re-rendering without refetching
+
+        function updateStaticText() {
+            document.getElementById('hero-title').innerText = locales[currentLang].heroTitle;
+            document.getElementById('hero-desc').innerText = locales[currentLang].heroDesc;
+            document.getElementById('hero-alt').innerText = locales[currentLang].heroAlt;
+            document.getElementById('hero-link-text').innerText = locales[currentLang].heroLinkText;
+            document.getElementById('lang-toggle').innerText = currentLang === 'en' ? 'ID' : 'EN';
+            document.documentElement.setAttribute('lang', currentLang);
+        }
+
         // Theme Toggle Script
         const themeToggleBtn = document.getElementById('theme-toggle');
         const currentTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
@@ -479,6 +552,16 @@
             }
         });
 
+        // Language Toggle Event Listener
+        document.getElementById('lang-toggle').addEventListener('click', () => {
+            currentLang = currentLang === 'en' ? 'id' : 'en';
+            localStorage.setItem('lang', currentLang);
+            updateStaticText();
+            if(parsedAppData.length > 0) {
+                renderCards(parsedAppData);
+            }
+        });
+
         // Dynamic File Engine Script
         const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR-90ZXL1hra4KgDJClg6_4x-LK9zn64KslBHS1P7U6zGOXKtKojQWjlKha9bPggppyYn_RMrT0Xe1h/pub?gid=0&single=true&output=csv';
 
@@ -489,131 +572,136 @@
             device: `<svg style="width:16px; height:16px; fill:currentColor;" viewBox="0 0 24 24"><path d="M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14z"/></svg>`
         };
 
-        Papa.parse(sheetUrl, {
-            download: true,
-            header: true,
-            complete: function(results) {
-                const container = document.getElementById('app-container');
-                const loadingText = document.getElementById('loading');
-                
-                loadingText.style.display = 'none';
+        function renderCards(data) {
+            const container = document.getElementById('app-container');
+            container.innerHTML = '';
+            
+            data.forEach(app => {
+                if (!app.AppName || !app.AppName.trim()) return;
 
-                results.data.forEach(app => {
-                    if (!app.AppName || !app.AppName.trim()) return;
+                const architectures = app.Architecture ? app.Architecture.split(',').map(s => s.trim()) : ['Universal'];
+                const directLinks = app.DownloadLink ? app.DownloadLink.split(',').map(s => s.trim()) : [];
+                const mirrorLinks = app.MirrorLink ? app.MirrorLink.split(',').map(s => s.trim()) : [];
+                const md5Hashes = app.MD5 ? app.MD5.split(',').map(s => s.trim()) : [];
+                const sha256Hashes = app.SHA256 ? app.SHA256.split(',').map(s => s.trim()) : [];
 
-                    // Cleanly break up comma-separated values into lists
-                    const architectures = app.Architecture ? app.Architecture.split(',').map(s => s.trim()) : ['Universal'];
-                    const directLinks = app.DownloadLink ? app.DownloadLink.split(',').map(s => s.trim()) : [];
-                    const mirrorLinks = app.MirrorLink ? app.MirrorLink.split(',').map(s => s.trim()) : [];
-                    const md5Hashes = app.MD5 ? app.MD5.split(',').map(s => s.trim()) : [];
-                    const sha256Hashes = app.SHA256 ? app.SHA256.split(',').map(s => s.trim()) : [];
+                let fileSectionsHTML = '';
 
-                    let fileSectionsHTML = '';
+                architectures.forEach((arch, index) => {
+                    let buttonsHTML = '';
+                    let hashesHTML = '';
 
-                    // Generate a dedicated layout section per parsed variant
-                    architectures.forEach((arch, index) => {
-                        let buttonsHTML = '';
-                        let hashesHTML = '';
-
-                        if (directLinks[index]) {
-                            buttonsHTML += `
-                                <a href="${directLinks[index]}" class="download-btn btn-direct" target="_blank">
-                                    ${icons.download} Direct Download
-                                </a>
-                            `;
-                        }
-
-                        if (mirrorLinks[index]) {
-                            buttonsHTML += `
-                                <a href="${mirrorLinks[index]}" class="download-btn btn-mirror" target="_blank">
-                                    ${icons.mirror} Mirror Link
-                                </a>
-                            `;
-                        }
-
-                        let md5Block = '';
-                        if (md5Hashes[index]) {
-                            md5Block = `
-                                <div class="hash-wrapper">
-                                    <span class="hash-title">MD5 Checksum</span>
-                                    <div class="hash-value" title="Double click to copy">${md5Hashes[index]}</div>
-                                </div>
-                            `;
-                        }
-
-                        let sha256Block = '';
-                        if (sha256Hashes[index]) {
-                            sha256Block = `
-                                <div class="hash-wrapper">
-                                    <span class="hash-title">SHA-256 Checksum</span>
-                                    <div class="hash-value" title="Double click to copy">${sha256Hashes[index]}</div>
-                                </div>
-                            `;
-                        }
-
-                        if (md5Block || sha256Block) {
-                            hashesHTML = `<div class="hash-container">${md5Block}${sha256Block}</div>`;
-                        }
-
-                        fileSectionsHTML += `
-                            <div class="file-section">
-                                <div class="file-section-title">
-                                    ${icons.device} ${arch} Variant
-                                </div>
-                                <div class="card-actions">
-                                    ${buttonsHTML}
-                                </div>
-                                ${hashesHTML}
-                            </div>
-                        `;
-                    });
-
-                    // Build global support block if provided
-                    let supportButtonHTML = '';
-                    if (app.AdLink && app.AdLink.trim() !== '') {
-                        supportButtonHTML += `
-                            <a href="${app.AdLink.trim()}" class="download-btn btn-ad" target="_blank">
-                                ${icons.heart} Support Me
+                    if (directLinks[index]) {
+                        buttonsHTML += `
+                            <a href="${directLinks[index]}" class="download-btn btn-direct" target="_blank">
+                                ${icons.download} ${locales[currentLang].directBtn}
                             </a>
                         `;
                     }
 
-                    let patchMetaHTML = '';
-                    if (app.PatchVersion && app.PatchVersion.trim() !== '') {
-                        patchMetaHTML = `<div class="card-meta-patch">Patch v${app.PatchVersion.trim()}</div>`;
+                    if (mirrorLinks[index]) {
+                        buttonsHTML += `
+                            <a href="${mirrorLinks[index]}" class="download-btn btn-mirror" target="_blank">
+                                ${icons.mirror} ${locales[currentLang].mirrorBtn}
+                            </a>
+                        `;
                     }
 
-                    const cardHTML = `
-                        <section class="apk-card">
-                            <div>
-                                <div class="card-header">
-                                    <div class="card-icon-wrapper">
-                                        <svg class="card-icon" viewBox="0 0 24 24"><path d="M6 18c0 .55.45 1 1 1h1v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h2v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h1c.55 0 1-.45 1-1V8H6v10zM3.5 8C2.67 8 2 8.67 2 9.5v7c0 .83.67 1.5 1.5 1.5S5 17.33 5 16.5v-7C5 8.67 4.33 8 3.5 8zm17 0c-.83 0-1.5.67-1.5 1.5v7c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5v-7c0-.83-.67-1.5-1.5-1.5zm-3.97-4.41l1.17-1.17c.1-.1.1-.26 0-.36l-.22-.22c-.1-.1-.26-.1-.36 0l-1.31 1.31C14.51 2.44 13.3 2 12 2s-2.51.44-3.82 1.15L6.87 1.84c-.1-.1-.26-.1-.36 0l-.22.22c-.1.1-.1.26 0 .36l1.17 1.17C5.76 5.16 4.37 7.39 4.05 10h15.9c-.32-2.61-1.71-4.84-4.42-6.41zM9 7.5c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm6 0c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1z"/></svg>
-                                    </div>
-                                    <div>
-                                        <h3 class="card-title">${app.AppName}</h3>
-                                        <div class="card-meta-container">
-                                            <div class="card-meta">v${app.Version}</div>
-                                            ${patchMetaHTML}
-                                        </div>
+                    let md5Block = '';
+                    if (md5Hashes[index]) {
+                        md5Block = `
+                            <div class="hash-wrapper">
+                                <span class="hash-title">MD5 Checksum</span>
+                                <div class="hash-value" title="${locales[currentLang].copyTooltip}">${md5Hashes[index]}</div>
+                            </div>
+                        `;
+                    }
+
+                    let sha256Block = '';
+                    if (sha256Hashes[index]) {
+                        sha256Block = `
+                            <div class="hash-wrapper">
+                                <span class="hash-title">SHA-256 Checksum</span>
+                                <div class="hash-value" title="${locales[currentLang].copyTooltip}">${sha256Hashes[index]}</div>
+                            </div>
+                        `;
+                    }
+
+                    if (md5Block || sha256Block) {
+                        hashesHTML = `<div class="hash-container">${md5Block}${sha256Block}</div>`;
+                    }
+
+                    fileSectionsHTML += `
+                        <div class="file-section">
+                            <div class="file-section-title">
+                                ${icons.device} ${currentLang === 'id' ? 'Varian' : locales[currentLang].variant} ${arch}
+                            </div>
+                            <div class="card-actions">
+                                ${buttonsHTML}
+                            </div>
+                            ${hashesHTML}
+                        </div>
+                    `;
+                });
+
+                let supportButtonHTML = '';
+                if (app.AdLink && app.AdLink.trim() !== '') {
+                    supportButtonHTML += `
+                        <a href="${app.AdLink.trim()}" class="download-btn btn-ad" target="_blank">
+                            ${icons.heart} ${locales[currentLang].supportBtn}
+                        </a>
+                    `;
+                }
+
+                let patchMetaHTML = '';
+                if (app.PatchVersion && app.PatchVersion.trim() !== '') {
+                    patchMetaHTML = `<div class="card-meta-patch">Patch v${app.PatchVersion.trim()}</div>`;
+                }
+
+                const cardHTML = `
+                    <section class="apk-card">
+                        <div>
+                            <div class="card-header">
+                                <div class="card-icon-wrapper">
+                                    <svg class="card-icon" viewBox="0 0 24 24"><path d="M6 18c0 .55.45 1 1 1h1v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h2v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h1c.55 0 1-.45 1-1V8H6v10zM3.5 8C2.67 8 2 8.67 2 9.5v7c0 .83.67 1.5 1.5 1.5S5 17.33 5 16.5v-7C5 8.67 4.33 8 3.5 8zm17 0c-.83 0-1.5.67-1.5 1.5v7c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5v-7c0-.83-.67-1.5-1.5-1.5zm-3.97-4.41l1.17-1.17c.1-.1.1-.26 0-.36l-.22-.22c-.1-.1-.26-.1-.36 0l-1.31 1.31C14.51 2.44 13.3 2 12 2s-2.51.44-3.82 1.15L6.87 1.84c-.1-.1-.26-.1-.36 0l-.22.22c-.1.1-.1.26 0 .36l1.17 1.17C5.76 5.16 4.37 7.39 4.05 10h15.9c-.32-2.61-1.71-4.84-4.42-6.41zM9 7.5c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm6 0c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1z"/></svg>
+                                </div>
+                                <div>
+                                    <h3 class="card-title">${app.AppName}</h3>
+                                    <div class="card-meta-container">
+                                        <div class="card-meta">v${app.Version}</div>
+                                        ${patchMetaHTML}
                                     </div>
                                 </div>
-                                <p class="card-body-text">${app.Description}</p>
-                                
-                                ${fileSectionsHTML}
                             </div>
+                            <p class="card-body-text">${app.Description}</p>
                             
-                            <div>
-                                ${supportButtonHTML}
-                            </div>
-                        </section>
-                    `;
-                    
-                    container.innerHTML += cardHTML;
-                });
+                            ${fileSectionsHTML}
+                        </div>
+                        
+                        <div>
+                            ${supportButtonHTML}
+                        </div>
+                    </section>
+                `;
+                
+                container.innerHTML += cardHTML;
+            });
+        }
+
+        // Run localization configuration right before executing remote logic
+        updateStaticText();
+        document.getElementById('loading').innerText = locales[currentLang].loading;
+
+        Papa.parse(sheetUrl, {
+            download: true,
+            header: true,
+            complete: function(results) {
+                document.getElementById('loading').style.display = 'none';
+                parsedAppData = results.data;
+                renderCards(parsedAppData);
             },
             error: function(err) {
-                document.getElementById('loading').innerText = "Error syncing apps. Please check spreadsheet configuration.";
+                document.getElementById('loading').innerText = locales[currentLang].error;
                 console.error(err);
             }
         });
