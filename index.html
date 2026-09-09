@@ -253,7 +253,82 @@
             box-shadow: var(--shadow-sm);
             transition: transform 0.3s cubic-bezier(0.2, 0, 0, 1), background-color 0.3s ease, box-shadow 0.3s ease;
         }
-
+        /* Clickable Preview Card Adjustments */
+        .apk-card {
+            cursor: pointer;
+            user-select: none;
+        }
+        
+        .apk-card:active {
+            transform: scale(0.98);
+        }
+        
+        /* Modal Backdrop Overlay */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.25s ease, visibility 0.25s ease;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Modal Popup Window */
+        .modal-card {
+            background: var(--md-sys-color-surface);
+            border: 1px solid var(--md-sys-color-outline-variant);
+            border-radius: 28px;
+            width: 100%;
+            max-width: 580px;
+            max-height: 85vh;
+            overflow-y: auto;
+            padding: 32px;
+            box-shadow: var(--shadow-md);
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.25s cubic-bezier(0.2, 0, 0, 1);
+        }
+        
+        .modal-overlay.active .modal-card {
+            transform: scale(1);
+        }
+        
+        /* Modal Close Button */
+        .modal-close-btn {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            background: var(--md-sys-color-surface-container);
+            border: 1px solid var(--md-sys-color-outline-variant);
+            color: var(--md-sys-color-on-background);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.2s ease;
+        }
+        
+        .modal-close-btn:hover {
+            background-color: var(--md-sys-color-surface-container-high);
+        }
         .apk-card:hover {
             transform: translateY(-4px);
             box-shadow: var(--shadow-md);
@@ -580,119 +655,114 @@
             device: `<svg style="width:16px; height:16px; fill:currentColor;" viewBox="0 0 24 24"><path d="M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14z"/></svg>`
         };
 
-        function renderCards(data) {
-            const container = document.getElementById('app-container');
-            container.innerHTML = '';
-            
-            data.forEach(app => {
-                if (!app.AppName || !app.AppName.trim()) return;
+        // Render Minimal Grid Cards
+function renderCards(data) {
+    const container = document.getElementById('app-container');
+    container.innerHTML = '';
+    
+    data.forEach((app, index) => {
+        if (!app.AppName || !app.AppName.trim()) return;
 
-                const architectures = app.Architecture ? app.Architecture.split(',').map(s => s.trim()) : ['Universal'];
-                const directLinks = app.DownloadLink ? app.DownloadLink.split(',').map(s => s.trim()) : [];
-                const mirrorLinks = app.MirrorLink ? app.MirrorLink.split(',').map(s => s.trim()) : [];
-                const md5Hashes = app.MD5 ? app.MD5.split(',').map(s => s.trim()) : [];
-                const sha256Hashes = app.SHA256 ? app.SHA256.split(',').map(s => s.trim()) : [];
+        let patchMetaHTML = '';
+        if (app.PatchVersion && app.PatchVersion.trim() !== '') {
+            patchMetaHTML = `<div class="card-meta-patch">Patch v${app.PatchVersion.trim()}</div>`;
+        }
 
-                let fileSectionsHTML = '';
-
-                architectures.forEach((arch, index) => {
-                    let buttonsHTML = '';
-                    let hashesHTML = '';
-
-                    if (directLinks[index]) {
-                        buttonsHTML += `
-                            <a href="${directLinks[index]}" class="download-btn btn-direct" target="_blank">
-                                ${icons.download} ${locales[currentLang].directBtn}
-                            </a>
-                        `;
-                    }
-
-                    if (mirrorLinks[index]) {
-                        buttonsHTML += `
-                            <a href="${mirrorLinks[index]}" class="download-btn btn-mirror" target="_blank">
-                                ${icons.mirror} ${locales[currentLang].mirrorBtn}
-                            </a>
-                        `;
-                    }
-
-                    let md5Block = '';
-                    if (md5Hashes[index]) {
-                        md5Block = `
-                            <div class="hash-wrapper">
-                                <span class="hash-title">MD5 Checksum</span>
-                                <div class="hash-value" title="${locales[currentLang].copyTooltip}">${md5Hashes[index]}</div>
-                            </div>
-                        `;
-                    }
-
-                    let sha256Block = '';
-                    if (sha256Hashes[index]) {
-                        sha256Block = `
-                            <div class="hash-wrapper">
-                                <span class="hash-title">SHA-256 Checksum</span>
-                                <div class="hash-value" title="${locales[currentLang].copyTooltip}">${sha256Hashes[index]}</div>
-                            </div>
-                        `;
-                    }
-
-                    if (md5Block || sha256Block) {
-                        hashesHTML = `<div class="hash-container">${md5Block}${sha256Block}</div>`;
-                    }
-
-                    fileSectionsHTML += `
-                        <div class="file-section">
-                            <div class="file-section-title">
-                                ${icons.device} ${currentLang === 'id' ? 'Varian' : locales[currentLang].variant} ${arch}
-                            </div>
-                            <div class="card-actions">
-                                ${buttonsHTML}
-                            </div>
-                            ${hashesHTML}
+        const cardHTML = `
+            <section class="apk-card" onclick="openModal(${index})">
+                <div class="card-header" style="margin-bottom: 0;">
+                    <div class="card-icon-wrapper">
+                        <svg class="card-icon" viewBox="0 0 24 24"><path d="M6 18c0 .55.45 1 1 1h1v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h2v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h1c.55 0 1-.45 1-1V8H6v10zM3.5 8C2.67 8 2 8.67 2 9.5v7c0 .83.67 1.5 1.5 1.5S5 17.33 5 16.5v-7C5 8.67 4.33 8 3.5 8zm17 0c-.83 0-1.5.67-1.5 1.5v7c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5v-7c0-.83-.67-1.5-1.5-1.5zm-3.97-4.41l1.17-1.17c.1-.1.1-.26 0-.36l-.22-.22c-.1-.1-.26-.1-.36 0l-1.31 1.31C14.51 2.44 13.3 2 12 2s-2.51.44-3.82 1.15L6.87 1.84c-.1-.1-.26-.1-.36 0l-.22.22c-.1.1-.1.26 0 .36l1.17 1.17C5.76 5.16 4.37 7.39 4.05 10h15.9c-.32-2.61-1.71-4.84-4.42-6.41zM9 7.5c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm6 0c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1z"/></svg>
+                    </div>
+                    <div>
+                        <h3 class="card-title">${app.AppName}</h3>
+                        <div class="card-meta-container">
+                            <div class="card-meta">v${app.Version}</div>
+                            ${patchMetaHTML}
                         </div>
-                    `;
-                });
+                    </div>
+                </div>
+            </section>
+        `;
+        
+        container.innerHTML += cardHTML;
+    });
+}
 
-                let supportButtonHTML = '';
-                if (app.AdLink && app.AdLink.trim() !== '') {
-                    supportButtonHTML += `
-                        <a href="${app.AdLink.trim()}" class="download-btn btn-ad" target="_blank">
-                            ${icons.heart} ${locales[currentLang].supportBtn}
-                        </a>
-                    `;
+        // Modal Toggle Logic
+        function openModal(index) {
+            const app = parsedAppData[index];
+            if (!app) return;
+        
+            const architectures = app.Architecture ? app.Architecture.split(',').map(s => s.trim()) : ['Universal'];
+            const directLinks = app.DownloadLink ? app.DownloadLink.split(',').map(s => s.trim()) : [];
+            const mirrorLinks = app.MirrorLink ? app.MirrorLink.split(',').map(s => s.trim()) : [];
+            const md5Hashes = app.MD5 ? app.MD5.split(',').map(s => s.trim()) : [];
+            const sha256Hashes = app.SHA256 ? app.SHA256.split(',').map(s => s.trim()) : [];
+        
+            let fileSectionsHTML = '';
+        
+            architectures.forEach((arch, i) => {
+                let buttonsHTML = '';
+                let hashesHTML = '';
+        
+                if (directLinks[i]) {
+                    buttonsHTML += `<a href="${directLinks[i]}" class="download-btn btn-direct" target="_blank">${icons.download} ${locales[currentLang].directBtn}</a>`;
                 }
-
-                let patchMetaHTML = '';
-                if (app.PatchVersion && app.PatchVersion.trim() !== '') {
-                    patchMetaHTML = `<div class="card-meta-patch">Patch v${app.PatchVersion.trim()}</div>`;
+                if (mirrorLinks[i]) {
+                    buttonsHTML += `<a href="${mirrorLinks[i]}" class="download-btn btn-mirror" target="_blank">${icons.mirror} ${locales[currentLang].mirrorBtn}</a>`;
                 }
-
-                const cardHTML = `
-                    <section class="apk-card">
-                        <div class="card-content-top">
-                            <div class="card-header">
-                                <div class="card-icon-wrapper">
-                                    <svg class="card-icon" viewBox="0 0 24 24"><path d="M6 18c0 .55.45 1 1 1h1v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h2v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h1c.55 0 1-.45 1-1V8H6v10zM3.5 8C2.67 8 2 8.67 2 9.5v7c0 .83.67 1.5 1.5 1.5S5 17.33 5 16.5v-7C5 8.67 4.33 8 3.5 8zm17 0c-.83 0-1.5.67-1.5 1.5v7c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5v-7c0-.83-.67-1.5-1.5-1.5zm-3.97-4.41l1.17-1.17c.1-.1.1-.26 0-.36l-.22-.22c-.1-.1-.26-.1-.36 0l-1.31 1.31C14.51 2.44 13.3 2 12 2s-2.51.44-3.82 1.15L6.87 1.84c-.1-.1-.26-.1-.36 0l-.22.22c-.1.1-.1.26 0 .36l1.17 1.17C5.76 5.16 4.37 7.39 4.05 10h15.9c-.32-2.61-1.71-4.84-4.42-6.41zM9 7.5c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm6 0c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1z"/></svg>
-                                </div>
-                                <div>
-                                    <h3 class="card-title">${app.AppName}</h3>
-                                    <div class="card-meta-container">
-                                        <div class="card-meta">v${app.Version}</div>
-                                        ${patchMetaHTML}
-                                    </div>
-                                </div>
-                            </div>
-                            <p class="card-body-text">${app.Description}</p>
-                        </div>
-                        
-                        <div class="card-content-bottom" style="margin-top: auto;">
-                            ${fileSectionsHTML}
-                            ${supportButtonHTML}
-                        </div>
-                    </section>
+        
+                let md5Block = md5Hashes[i] ? `<div class="hash-wrapper"><span class="hash-title">MD5 Checksum</span><div class="hash-value">${md5Hashes[i]}</div></div>` : '';
+                let sha256Block = sha256Hashes[i] ? `<div class="hash-wrapper"><span class="hash-title">SHA-256 Checksum</span><div class="hash-value">${sha256Hashes[i]}</div></div>` : '';
+        
+                if (md5Block || sha256Block) hashesHTML = `<div class="hash-container">${md5Block}${sha256Block}</div>`;
+        
+                fileSectionsHTML += `
+                    <div class="file-section">
+                        <div class="file-section-title">${icons.device} ${locales[currentLang].variant} ${arch}</div>
+                        <div class="card-actions">${buttonsHTML}</div>
+                        ${hashesHTML}
+                    </div>
                 `;
-                
-                container.innerHTML += cardHTML;
             });
+        
+            let supportButtonHTML = app.AdLink && app.AdLink.trim() ? `<a href="${app.AdLink.trim()}" class="download-btn btn-ad" target="_blank">${icons.heart} ${locales[currentLang].supportBtn}</a>` : '';
+            let patchMetaHTML = app.PatchVersion && app.PatchVersion.trim() ? `<div class="card-meta-patch">Patch v${app.PatchVersion.trim()}</div>` : '';
+        
+            const modalContent = `
+                <button class="modal-close-btn" onclick="closeModalForce()">✕</button>
+                <div class="card-header">
+                    <div class="card-icon-wrapper">
+                        <svg class="card-icon" viewBox="0 0 24 24"><path d="M6 18c0 .55.45 1 1 1h1v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h2v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h1c.55 0 1-.45 1-1V8H6v10zM3.5 8C2.67 8 2 8.67 2 9.5v7c0 .83.67 1.5 1.5 1.5S5 17.33 5 16.5v-7C5 8.67 4.33 8 3.5 8zm17 0c-.83 0-1.5.67-1.5 1.5v7c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5v-7c0-.83-.67-1.5-1.5-1.5zm-3.97-4.41l1.17-1.17c.1-.1.1-.26 0-.36l-.22-.22c-.1-.1-.26-.1-.36 0l-1.31 1.31C14.51 2.44 13.3 2 12 2s-2.51.44-3.82 1.15L6.87 1.84c-.1-.1-.26-.1-.36 0l-.22.22c-.1.1-.1.26 0 .36l1.17 1.17C5.76 5.16 4.37 7.39 4.05 10h15.9c-.32-2.61-1.71-4.84-4.42-6.41zM9 7.5c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm6 0c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1z"/></svg>
+                    </div>
+                    <div>
+                        <h3 class="card-title">${app.AppName}</h3>
+                        <div class="card-meta-container">
+                            <div class="card-meta">v${app.Version}</div>
+                            ${patchMetaHTML}
+                        </div>
+                    </div>
+                </div>
+                <p class="card-body-text">${app.Description}</p>
+                ${fileSectionsHTML}
+                ${supportButtonHTML}
+            `;
+        
+            document.getElementById('modal-card-content').innerHTML = modalContent;
+            document.getElementById('app-modal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeModal(e) {
+            if (e.target.id === 'app-modal') {
+                closeModalForce();
+            }
+        }
+        
+        function closeModalForce() {
+            document.getElementById('app-modal').classList.remove('active');
+            document.body.style.overflow = '';
         }
 
         // Run localization configuration right before executing remote logic
@@ -713,5 +783,10 @@
             }
         });
     </script>
+    <div class="modal-overlay" id="app-modal" onclick="closeModal(event)">
+    <div class="modal-card" id="modal-card-content">
+        <!-- Dynamic Popup Content Loads Here -->
+    </div>
+</div>
 </body>
 </html>
