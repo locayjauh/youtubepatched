@@ -41,7 +41,10 @@
             --shadow-sm: 0 2px 4px rgba(0,0,0,0.04);
             --shadow-md: 0 8px 24px rgba(56, 90, 146, 0.06);
         }
-
+        /* Remove blue highlight on tap for mobile browsers */
+        * {
+            -webkit-tap-highlight-color: transparent;
+        }
         [data-theme="dark"] {
             /* Material 3 Expressive Dark Theme Tokens */
             --md-sys-color-primary: #a5c8ff;
@@ -70,6 +73,7 @@
             --shadow-sm: 0 2px 4px rgba(0,0,0,0.2);
             --shadow-md: 0 8px 24px rgba(0,0,0,0.3);
         }
+        
 
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
