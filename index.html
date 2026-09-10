@@ -1,795 +1,649 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="antialiased">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Morphe Pre-Patched – Download Patched YouTube APKs</title>
-    
+    <title>Morphe Pre-Patches</title>
+    <link rel="icon" type="image/png" href="https://nirfahost.my.id/assets/icon/morphe.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <meta name="description" content="Download ready-to-install, pre-patched YouTube Morphe APKs instantly. Virus-free, clean builds directly from the official patcher.">
-    <meta name="keywords" content="Morphe patcher, YouTube pre-patched, Morphe APK download, patched YouTube APK, adblock YouTube android, youtube mod, youtube mod apk, youtube vanced alternative, youtube revanced alternative, youtube no ads apk, youtube background play apk, modified youtube app, premium youtube free apk, premium youtube mod, client for youtube android">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://youtubepatched.nirfahost.my.id/">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Geist+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                        mono: ['Geist Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- PapaParse CDN for parsing CSV Google Sheet -->
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+
     <style>
-        :root {
-            /* Material 3 Expressive Light Theme Tokens */
-            --md-sys-color-primary: #385a92;
-            --md-sys-color-on-primary: #ffffff;
-            --md-sys-color-primary-container: #d6e3ff;
-            --md-sys-color-on-primary-container: #001b3e;
-            
-            --md-sys-color-secondary: #565f71;
-            --md-sys-color-on-secondary: #ffffff;
-            --md-sys-color-secondary-container: #dae2f9;
-            --md-sys-color-on-secondary-container: #131c2c;
-
-            --md-sys-color-tertiary: #6f5575;
-            --md-sys-color-on-tertiary: #ffffff;
-            --md-sys-color-tertiary-container: #f9d8fd;
-            --md-sys-color-on-tertiary-container: #28132e;
-
-            --md-sys-color-background: #f9f9fc;
-            --md-sys-color-on-background: #191c20;
-            --md-sys-color-surface: #ffffff;
-            --md-sys-color-surface-container: #f0f3f8;
-            --md-sys-color-surface-container-high: #e2e7ec;
-            
-            --md-sys-color-outline: #74777f;
-            --md-sys-color-outline-variant: #c4c6d0;
-            --shadow-sm: 0 2px 4px rgba(0,0,0,0.04);
-            --shadow-md: 0 8px 24px rgba(56, 90, 146, 0.06);
-        }
-        /* Remove blue highlight on tap for mobile browsers */
-        * {
-            -webkit-tap-highlight-color: transparent;
-        }
-        [data-theme="dark"] {
-            /* Material 3 Expressive Dark Theme Tokens */
-            --md-sys-color-primary: #a5c8ff;
-            --md-sys-color-on-primary: #002f66;
-            --md-sys-color-primary-container: #1c4279;
-            --md-sys-color-on-primary-container: #d6e3ff;
-            
-            --md-sys-color-secondary: #bfc6dc;
-            --md-sys-color-on-secondary: #283141;
-            --md-sys-color-secondary-container: #3d4758;
-            --md-sys-color-on-secondary-container: #dae2f9;
-
-            --md-sys-color-tertiary: #dcbdff;
-            --md-sys-color-on-tertiary: #3e274f;
-            --md-sys-color-tertiary-container: #563d66;
-            --md-sys-color-on-tertiary-container: #f9d8fd;
-
-            --md-sys-color-background: #0f1115;
-            --md-sys-color-on-background: #e2e2e9;
-            --md-sys-color-surface: #16181d;
-            --md-sys-color-surface-container: #1b1f26;
-            --md-sys-color-surface-container-high: #252a33;
-            
-            --md-sys-color-outline: #8e9099;
-            --md-sys-color-outline-variant: #33373f;
-            --shadow-sm: 0 2px 4px rgba(0,0,0,0.2);
-            --shadow-md: 0 8px 24px rgba(0,0,0,0.3);
-        }
-        
-
         body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            margin: 0;
-            background-color: var(--md-sys-color-background);
-            color: var(--md-sys-color-on-background);
-            -webkit-font-smoothing: antialiased;
-            transition: background-color 0.3s ease, color 0.3s ease;
+            font-family: 'Outfit', sans-serif;
         }
 
-        /* Top App Bar */
-        .navbar {
-            background-color: var(--md-sys-color-surface);
-            padding: 16px 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            border-bottom: 1px solid var(--md-sys-color-outline-variant);
-            box-shadow: var(--shadow-sm);
-            transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .nav-container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 24px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .brand {
-            font-size: 1.4rem;
-            font-weight: 800;
-            letter-spacing: -0.5px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            color: var(--md-sys-color-on-background);
-        }
-
-        .brand-dot {
-            width: 12px;
-            height: 12px;
-            background-color: var(--md-sys-color-primary);
-            border-radius: 50%;
-            box-shadow: 0 0 10px var(--md-sys-color-primary);
-        }
-
-        .nav-actions {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        /* Selector Controls Styling */
-        .control-btn {
-            background: none;
-            border: 1px solid var(--md-sys-color-outline-variant);
-            padding: 10px;
-            border-radius: 100px;
-            cursor: pointer;
-            color: var(--md-sys-color-on-background);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
-        }
-
-        .control-btn:hover {
-            background-color: var(--md-sys-color-surface-container);
-            transform: scale(1.05);
-        }
-
-        .lang-select-btn {
-            font-family: inherit;
-            font-size: 0.85rem;
-            font-weight: 700;
-            padding: 10px 16px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .theme-toggle-icon {
-            width: 20px;
-            height: 20px;
-            fill: currentColor;
-        }
-
-        [data-theme="dark"] .theme-toggle-icon.icon-sun,
-        html:not([data-theme="dark"]) .theme-toggle-icon.icon-moon {
-            display: none;
-        }
-
-        .container {
-            max-width: 1100px;
-            margin: 64px auto;
-            padding: 0 24px;
-        }
-
-        /* Expressive Header Block */
-        .header-text {
-            text-align: center;
-            margin-bottom: 64px;
-            max-width: 760px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .header-text h2 {
-            font-size: 3rem;
-            font-weight: 800;
-            letter-spacing: -1.5px;
-            margin: 0 0 20px 0;
-            color: var(--md-sys-color-on-background);
-            line-height: 1.15;
-        }
-
-        .header-text p {
-            color: var(--md-sys-color-secondary);
-            font-size: 1.15rem;
-            line-height: 1.65;
-            margin: 0 0 28px 0;
-            font-weight: 500;
-        }
-
-        .official-link-wrapper {
-            display: inline-block;
-            text-align: center;
-            font-size: 0.95rem;
-            color: var(--md-sys-color-secondary);
-            background: var(--md-sys-color-surface-container);
-            padding: 14px 28px;
-            border-radius: 30px;
-            font-weight: 500;
-            line-height: 1.6;
-            max-width: 100%;
-            box-sizing: border-box;
-            border: 1px solid var(--md-sys-color-outline-variant);
-            transition: background-color 0.3s ease;
-        }
-
-        .official-link {
-            color: var(--md-sys-color-primary);
-            text-decoration: none;
-            font-weight: 700;
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            transition: opacity 0.2s ease, color 0.3s ease;
-        }
-
-        .official-link:hover {
-            text-decoration: underline;
-            opacity: 0.85;
-        }
-
-        .official-link-icon {
-            width: 16px;
-            height: 16px;
-            fill: currentColor;
-            display: inline-block;
-        }
-
-        /* M3 Grid Layout */
-        .download-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-            gap: 24px;
-        }
-
-        /* Clickable Grid Preview Cards */
-        .apk-card {
-            background: var(--md-sys-color-surface);
-            border: 1px solid var(--md-sys-color-outline-variant);
-            border-radius: 24px;
-            padding: 24px;
-            box-shadow: var(--shadow-sm);
-            cursor: pointer;
-            user-select: none;
-            transition: transform 0.2s cubic-bezier(0.2, 0, 0, 1), background-color 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .apk-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .apk-card:active {
-            transform: scale(0.98);
-        }
-
-        .card-header {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
-
-        .card-icon-wrapper {
-            background-color: var(--md-sys-color-primary-container);
-            padding: 14px;
-            border-radius: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background-color 0.3s ease;
-            width: 32px;
-            height: 32px;
-            flex-shrink: 0;
-        }
-
-        .card-icon {
-            width: 32px;
-            height: 32px;
-            fill: var(--md-sys-color-on-primary-container);
-            transition: fill 0.3s ease;
-        }
-
-        .card-icon-img {
-            width: 32px;
-            height: 32px;
-            object-fit: contain;
-            border-radius: 8px;
-        }
-
-        .card-title {
-            margin: 0;
-            font-size: 1.3rem;
-            font-weight: 700;
-            letter-spacing: -0.4px;
-            color: var(--md-sys-color-on-background);
-            line-height: 1.2;
-        }
-
-        .card-meta-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 8px;
-        }
-
-        .card-meta {
-            font-size: 0.8rem;
-            font-weight: 700;
-            color: var(--md-sys-color-on-secondary-container);
-            background: var(--md-sys-color-secondary-container);
-            padding: 4px 12px;
-            border-radius: 8px;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-
-        .card-meta-patch {
-            font-size: 0.8rem;
-            font-weight: 700;
-            color: var(--md-sys-color-on-tertiary-container);
-            background: var(--md-sys-color-tertiary-container);
-            padding: 4px 12px;
-            border-radius: 8px;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-
-        .card-body-text {
-            color: var(--md-sys-color-secondary);
-            font-size: 1rem;
-            line-height: 1.6;
-            margin: 20px 0 24px 0;
-            font-weight: 500;
-        }
-
-        /* Isolated File Architecture Block */
-        .file-section {
-            background-color: var(--md-sys-color-surface-container);
-            border: 1px solid transparent;
-            border-radius: 20px;
-            padding: 20px;
-            margin-top: 18px;
-            transition: background-color 0.3s ease, border-color 0.3s ease;
-        }
-
-        .file-section-title {
-            font-size: 0.85rem;
-            font-weight: 800;
-            color: var(--md-sys-color-primary);
-            text-transform: uppercase;
-            letter-spacing: 0.7px;
-            margin-bottom: 14px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .hash-container {
-            margin-top: 16px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .hash-wrapper {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-
-        .hash-title {
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.7px;
-            font-size: 0.65rem;
-            color: var(--md-sys-color-outline);
-        }
-
-        .hash-value {
-            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-            background-color: var(--md-sys-color-surface-container-high);
-            color: var(--md-sys-color-on-background);
-            padding: 10px 12px;
-            border-radius: 10px;
-            border: 1px solid var(--md-sys-color-outline-variant);
-            word-break: break-all;
-            user-select: all;
-            font-size: 0.75rem;
-            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
-        }
-        
-        .card-actions {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-top: 12px;
-        }
-
-        .download-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            text-decoration: none;
-            padding: 14px 20px;
-            border-radius: 100px;
-            font-weight: 700;
-            font-size: 0.95rem;
-            transition: filter 0.2s ease, opacity 0.2s ease, background-color 0.3s ease, color 0.3s ease, transform 0.1s ease;
-            cursor: pointer;
-            box-sizing: border-box;
-            width: 100%;
-        }
-
-        .download-btn:active {
-            transform: scale(0.98);
-        }
-
-        .download-btn:hover {
-            filter: brightness(0.92);
-        }
-
-        [data-theme="dark"] .download-btn:hover {
-            filter: brightness(1.12);
-        }
-
-        .btn-direct {
-            background-color: var(--md-sys-color-primary);
-            color: var(--md-sys-color-on-primary);
-        }
-        
-        .btn-mirror {
-            background-color: var(--md-sys-color-secondary-container);
-            color: var(--md-sys-color-on-secondary-container);
-            border: 1px solid var(--md-sys-color-outline-variant);
-        }
-
-        .btn-ad {
-            background-color: var(--md-sys-color-tertiary-container);
-            color: var(--md-sys-color-on-tertiary-container);
-            margin-top: 24px;
-        }
-
-        .btn-icon {
-            width: 18px;
-            height: 18px;
-            fill: currentColor;
-        }
-
-        /* Modal Backdrop Overlay */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.65);
-            backdrop-filter: blur(8px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.25s ease, visibility 0.25s ease;
-            padding: 20px;
-            box-sizing: border-box;
-        }
-
-        .modal-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        /* Modal Popup Window */
-        .modal-card {
-            background: var(--md-sys-color-surface);
-            border: 1px solid var(--md-sys-color-outline-variant);
-            border-radius: 28px;
-            width: 100%;
-            max-width: 580px;
-            max-height: 85vh;
-            overflow-y: auto;
-            padding: 32px;
-            box-shadow: var(--shadow-md);
-            position: relative;
-            transform: scale(0.9);
-            transition: transform 0.25s cubic-bezier(0.2, 0, 0, 1);
-        }
-
-        .modal-overlay.active .modal-card {
-            transform: scale(1);
-        }
-
-        /* Modal Close Button */
-        .modal-close-btn {
-            position: absolute;
-            top: 24px;
-            right: 24px;
-            background: var(--md-sys-color-surface-container);
-            border: 1px solid var(--md-sys-color-outline-variant);
-            color: var(--md-sys-color-on-background);
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background-color 0.2s ease;
-            font-weight: 700;
-        }
-
-        .modal-close-btn:hover {
-            background-color: var(--md-sys-color-surface-container-high);
-        }
-
-        #loading {
-            text-align: center;
-            font-weight: 600;
-            color: var(--md-sys-color-secondary);
-            padding: 64px 0;
-            font-size: 1.2rem;
+        .font-mono {
+            font-family: 'Geist Mono', monospace;
         }
     </style>
 </head>
-<body>
 
-    <header class="navbar">
-        <div class="nav-container">
-            <div class="brand">
-                <div class="brand-dot"></div>
-                YouTube Morphe Pre-Patched
+<body
+    class="min-h-screen bg-slate-50 text-slate-800 transition-colors duration-300 dark:bg-slate-950 dark:text-slate-200 font-sans selection:bg-indigo-500 selection:text-white relative overflow-x-hidden flex flex-col">
+
+    <!-- Header -->
+    <header
+        class="sticky top-0 z-50 backdrop-blur-md bg-white/80 dark:bg-slate-900/80 border-b border-slate-200 dark:border-slate-800 transition-colors">
+        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <img src="https://nirfahost.my.id/assets/icon/morphe.svg" class="h-8 w-auto" alt="Logo">
+                <span class="font-extrabold text-xl tracking-tight text-slate-900 dark:text-slate-50">
+                    Morphe Pre-Patches
+                </span>
             </div>
-            <div class="nav-actions">
-                <button class="control-btn lang-select-btn" id="lang-toggle" aria-label="Switch Language">ID</button>
-                <button class="control-btn" id="theme-toggle" aria-label="Toggle dark mode">
-                    <svg class="theme-toggle-icon icon-sun" viewBox="0 0 24 24"><path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58c-.39-.39-1.03-.39-1.41 0s-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37c-.39-.39-1.03-.39-1.41 0s-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41l-1.06-1.06zm1.06-12.37c-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06c.39-.38.39-1.02 0-1.41zm-12.37 12.37c-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06c.38-.38.38-1.02 0-1.41z"/></svg>
-                    <svg class="theme-toggle-icon icon-moon" viewBox="0 0 24 24"><path d="M12.3 22h-.1c-5.4 0-9.8-4.5-9.8-10s4.4-10 9.9-10c.5 0 .9.3 1.1.7.2.4.1.9-.2 1.2-1.9 1.8-3 4.3-3 7s1.1 5.2 3 7c.3.3.4.8.2 1.2-.2.5-.7.9-1.1.9zm.6-17.7c-2.3 1.6-3.7 4.2-3.7 7.1s1.4 5.5 3.8 7.1c-.8.1-1.6.2-2.4.2-4.3 0-7.8-3.6-7.8-8s3.5-8 7.8-8c.8 0 1.6.1 2.3.3z"/></svg>
+            <div class="flex items-center gap-4">
+                <button onclick="toggleTheme()"
+                    class="p-2.5 rounded-full border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 transition text-slate-700 dark:text-slate-300"
+                    aria-label="Toggle theme">
+                    <svg class="w-4 h-4 hidden dark:block" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                        stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-12.728l.707.707m12.728 12.728l.707.707M12 8a4 4 0 100 8 4 4 0 000-8z" />
+                    </svg>
+                    <svg class="w-4 h-4 block dark:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                        stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                    </svg>
                 </button>
             </div>
         </div>
     </header>
 
-    <div class="container">
-        <div class="header-text">
-            <h2 id="hero-title">Pre-Patched Downloads</h2>
-            <p id="hero-desc">Can't patch it yourself? Grab a ready-to-install, patched APK instantly. There are no viruses or suspicious code—just an application patched directly from Morphe Patcher using the default settings. Skip the hassle and start using it right away!</p>
-            <div class="official-link-wrapper">
-                <span id="hero-alt">You can patch it yourself from the official website </span>
-                <a href="https://morphe.software" class="official-link" target="_blank">
-                    <span id="hero-link-text">morphe.software</span>
-                    <svg class="official-link-icon" viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>
+    <!-- Main Content -->
+    <main class="flex-grow max-w-7xl mx-auto w-full px-4 py-16">
+        <div class="text-center max-w-2xl mx-auto mb-16">
+            <h1 class="text-4xl sm:text-5xl font-black tracking-tight mb-6 text-slate-900 dark:text-slate-50">
+                Per-Patches Morphe App.
+            </h1>
+            <p class="text-lg text-slate-600 dark:text-slate-400 font-medium leading-relaxed mb-6">
+                Can't patch it yourself? Grab a ready-to-install, patched APK instantly. There are no viruses or
+                suspicious code—just an application patched directly from Morphe Patcher using the default settings.
+                Skip the hassle and start using it right away!.
+            </p>
+            <div
+                class="inline-block bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 px-5 py-3 rounded-2xl text-sm font-medium text-slate-600 dark:text-slate-400">
+                Prefer to patch it yourself? Visit the official website at
+                <a href="https://morphe.software" target="_blank" rel="noopener noreferrer"
+                    class="font-bold text-indigo-600 dark:text-indigo-400 hover:underline inline-flex items-center gap-1">
+                    morphe.software
+                    <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
                 </a>
             </div>
         </div>
 
-        <div id="loading">Loading apps...</div>
+        <div class="max-w-md mx-auto mb-12">
+            <div class="relative">
+                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                    <svg class="h-5 w-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                        stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                </div>
+                <input type="text" id="searchInput" placeholder="Search applications..." onkeyup="filterApps()"
+                    class="block w-full pl-11 pr-4 py-3 border border-slate-200 dark:border-slate-800 rounded-2xl bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all shadow-sm" />
+            </div>
+        </div>
 
-        <main class="download-grid" id="app-container"></main>
-    </div>
+        <!-- Container Dynamic Apps Rendered from Google Sheets -->
+        <div id="apps-container">
+            <div class="text-center py-20 bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-3xl"
+                id="loading-spinner">
+                <svg class="animate-spin h-8 w-8 text-indigo-500 mx-auto mb-4" xmlns="http://www.w3.org/2000/svg"
+                    fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                    </path>
+                </svg>
+                <p class="text-slate-500 dark:text-slate-400 font-medium">Loading applications data...</p>
+            </div>
+        </div>
 
-    <!-- Modal Popup Overlay -->
-    <div class="modal-overlay" id="app-modal" onclick="closeModal(event)">
-        <div class="modal-card" id="modal-card-content"></div>
-    </div>
+        <!-- Dynamic Single Modal -->
+        <div id="app-modal" class="fixed inset-0 z-[100] hidden items-center justify-center sm:p-4" role="dialog"
+            aria-modal="true">
+            <div class="absolute inset-0 bg-slate-900/40 dark:bg-slate-950/60 backdrop-blur-sm transition-opacity opacity-0 modal-backdrop"
+                onclick="closeAppModal()"></div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
-    
+            <div
+                class="relative w-full h-full sm:h-auto sm:max-w-2xl bg-white dark:bg-slate-900 rounded-none sm:rounded-3xl shadow-2xl max-h-screen sm:max-h-[90vh] flex flex-col transform scale-95 opacity-0 transition-all modal-content border-0 sm:border border-slate-200 dark:border-slate-800 overflow-hidden">
+
+                <!-- Header -->
+                <div
+                    class="shrink-0 relative px-6 py-4 border-b border-slate-100 dark:border-slate-800/60 backdrop-blur-xl bg-white/80 dark:bg-slate-900/80 flex items-start justify-between gap-4 z-10">
+                    <div class="flex items-start gap-4 pr-8">
+                        <div id="modal-icon-container"></div>
+
+                        <div class="pt-1">
+                            <h2 id="modal-title"
+                                class="font-extrabold text-xl sm:text-2xl text-slate-900 dark:text-slate-100 mb-1 leading-tight">
+                            </h2>
+                            <div class="flex flex-wrap items-center gap-x-2 gap-y-1">
+                                <span id="modal-package-name"
+                                    class="text-xs sm:text-sm font-mono text-slate-500 dark:text-slate-400"></span>
+                                <span id="modal-version-badge"
+                                    class="text-[10px] font-bold px-2 py-0.5 bg-slate-100 dark:bg-slate-800 rounded-md text-slate-600 dark:text-slate-400 hidden"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="button" onclick="closeAppModal()"
+                        class="absolute top-4 right-4 p-2 rounded-full text-slate-400 hover:text-slate-600 hover:bg-slate-100 dark:hover:bg-slate-800 dark:hover:text-slate-300 transition focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Body -->
+                <div class="p-6 overflow-y-auto flex-1 overscroll-contain">
+                    <p id="modal-description"
+                        class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-6 font-medium hidden"></p>
+
+                    <!-- Patches Section -->
+                    <div id="modal-patches-section"
+                        class="bg-indigo-50/50 dark:bg-indigo-950/20 border border-indigo-100 dark:border-indigo-900/40 rounded-2xl p-4 mb-6 hidden">
+                        <div class="flex items-center gap-2 mb-2">
+                            <svg class="w-5 h-5 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+                            </svg>
+                            <h3 class="font-bold text-indigo-900 dark:text-indigo-300">Applied Patches</h3>
+                        </div>
+                        <div class="flex items-center justify-between flex-wrap gap-2">
+                            <div class="flex items-center gap-2">
+                                <span id="modal-patches-name"
+                                    class="font-semibold text-slate-800 dark:text-slate-200"></span>
+                                <span id="modal-patches-version"
+                                    class="text-xs font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-100 dark:bg-indigo-900/60 px-2 py-0.5 rounded-md hidden"></span>
+                            </div>
+                            <a id="modal-patches-source" href="#" target="_blank" rel="noopener noreferrer"
+                                class="text-xs font-bold inline-flex items-center gap-1 px-3 py-1.5 bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-indigo-200 dark:hover:border-indigo-800 transition hidden">
+                                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                </svg>
+                                Source
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Variants Section -->
+                    <h3 class="font-bold text-slate-800 dark:text-slate-200 mb-3 flex items-center gap-2">
+                        <svg class="w-5 h-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                            stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                        </svg>
+                        Downloads & Variants
+                    </h3>
+                    <div id="modal-variants-container" class="space-y-3"></div>
+
+                    <!-- Support the Developer -->
+                    <div id="modal-ad-link-container" class="mt-6 hidden"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer
+        class="py-8 text-center text-slate-400 dark:text-slate-600 text-sm font-medium mt-auto border-t border-slate-200 dark:border-slate-800">
+        &copy; <span id="year"></span> Morphe Pre-Patches.
+    </footer>
+
     <script>
-        const locales = {
-            en: {
-                heroTitle: "Pre-Patched Downloads",
-                heroDesc: "Can't patch it yourself? Grab a ready-to-install, patched APK instantly. There are no viruses or suspicious code—just an application patched directly from Morphe Patcher using the default settings. Skip the hassle and start using it right away!",
-                heroAlt: "You can patch it yourself from the official website ",
-                heroLinkText: "morphe.software",
-                loading: "Loading applications...",
-                error: "Error syncing apps. Please check spreadsheet configuration.",
-                variant: "Variant",
-                copyTooltip: "Double click to copy",
-                supportBtn: "Support Me",
-                directBtn: "Download",
-                mirrorBtn: "Mirror Link"
-            },
-            id: {
-                heroTitle: "Download Pre-Patched",
-                heroDesc: "Malas melakukan patching sendiri? Dapatkan APK pre-patched yang aman dan siap pasang secara instan. Tanpa malware ataupun skrip mencurigakan—semua build bersih ini dikompilasi langsung via Morphe Patcher menggunakan konfigurasi default. Lewati proses ribet dan langsung gunakan aplikasinya!",
-                heroAlt: "Atau, Anda bisa melakukan patch secara manual melalui situs resmi mereka ",
-                heroLinkText: "morphe.software",
-                loading: "Memuat aplikasi...",
-                error: "Gagal memuat aplikasi. Silakan periksa konfigurasi spreadsheet Anda.",
-                variant: "Varian",
-                copyTooltip: "Klik ganda untuk menyalin",
-                supportBtn: "Dukung Saya (Support Me)",
-                directBtn: "Download",
-                mirrorBtn: "Mirror Link"
-            }
-        };
+        // GANTI LINK DI BAWAH DENGAN LINK CSV PUBLISH TO WEB GOOGLE SHEET ANDA
+        const GOOGLE_SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR-90ZXL1hra4KgDJClg6_4x-LK9zn64KslBHS1P7U6zGOXKtKojQWjlKha9bPggppyYn_RMrT0Xe1h/pub?gid=0&single=true&output=csv';
 
-        let currentLang = localStorage.getItem('lang') || 'en';
-        let parsedAppData = [];
+        document.getElementById('year').innerText = new Date().getFullYear();
 
-        function updateStaticText() {
-            document.getElementById('hero-title').innerText = locales[currentLang].heroTitle;
-            document.getElementById('hero-desc').innerText = locales[currentLang].heroDesc;
-            document.getElementById('hero-alt').innerText = locales[currentLang].heroAlt;
-            document.getElementById('hero-link-text').innerText = locales[currentLang].heroLinkText;
-            document.getElementById('lang-toggle').innerText = currentLang === 'en' ? 'ID' : 'EN';
-            document.documentElement.setAttribute('lang', currentLang);
+        let appsMap = {};
+
+        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
         }
 
-        const themeToggleBtn = document.getElementById('theme-toggle');
-        const currentTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-
-        if (currentTheme === 'dark') {
-            document.documentElement.setAttribute('data-theme', 'dark');
+        function toggleTheme() {
+            document.documentElement.classList.toggle('dark');
+            localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
         }
 
-        themeToggleBtn.addEventListener('click', () => {
-            let theme = document.documentElement.getAttribute('data-theme');
-            if (theme === 'dark') {
-                document.documentElement.removeAttribute('data-theme');
-                localStorage.setItem('theme', 'light');
-            } else {
-                document.documentElement.setAttribute('data-theme', 'dark');
-                localStorage.setItem('theme', 'dark');
-            }
-        });
-
-        document.getElementById('lang-toggle').addEventListener('click', () => {
-            currentLang = currentLang === 'en' ? 'id' : 'en';
-            localStorage.setItem('lang', currentLang);
-            updateStaticText();
-            if(parsedAppData.length > 0) {
-                renderCards(parsedAppData);
-            }
-        });
-
-        const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR-90ZXL1hra4KgDJClg6_4x-LK9zn64KslBHS1P7U6zGOXKtKojQWjlKha9bPggppyYn_RMrT0Xe1h/pub?gid=0&single=true&output=csv';
-
-        const icons = {
-            download: `<svg class="btn-icon" viewBox="0 0 24 24"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>`,
-            mirror: `<svg class="btn-icon" viewBox="0 0 24 24"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/></svg>`,
-            heart: `<svg class="btn-icon" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>`,
-            device: `<svg style="width:16px; height:16px; fill:currentColor;" viewBox="0 0 24 24"><path d="M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14z"/></svg>`
-        };
-
-        function getIconHTML(iconUrl) {
-            if (iconUrl && iconUrl.trim() !== '') {
-                return `<img src="${iconUrl.trim()}" class="card-icon-img" alt="App Icon" loading="lazy" />`;
-            }
-            return `<svg class="card-icon" viewBox="0 0 24 24"><path d="M6 18c0 .55.45 1 1 1h1v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h2v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h1c.55 0 1-.45 1-1V8H6v10zM3.5 8C2.67 8 2 8.67 2 9.5v7c0 .83.67 1.5 1.5 1.5S5 17.33 5 16.5v-7C5 8.67 4.33 8 3.5 8zm17 0c-.83 0-1.5.67-1.5 1.5v7c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5v-7c0-.83-.67-1.5-1.5-1.5zm-3.97-4.41l1.17-1.17c.1-.1.1-.26 0-.36l-.22-.22c-.1-.1-.26-.1-.36 0l-1.31 1.31C14.51 2.44 13.3 2 12 2s-2.51.44-3.82 1.15L6.87 1.84c-.1-.1-.26-.1-.36 0l-.22.22c-.1.1-.1.26 0 .36l1.17 1.17C5.76 5.16 4.37 7.39 4.05 10h15.9c-.32-2.61-1.71-4.84-4.42-6.41zM9 7.5c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm6 0c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1z"/></svg>`;
+        function copyText(text, buttonElement) {
+            navigator.clipboard.writeText(text).then(() => {
+                const originalText = buttonElement.innerText;
+                buttonElement.innerText = 'Copied!';
+                setTimeout(() => buttonElement.innerText = originalText, 2000);
+            });
         }
 
-        function renderCards(data) {
-            const container = document.getElementById('app-container');
-            container.innerHTML = '';
-            
-            data.forEach((app, index) => {
-                if (!app.AppName || !app.AppName.trim()) return;
+        function loadDataFromGoogleSheet() {
+            // Check if PapaParse is loaded
+            if (typeof Papa === 'undefined') {
+                renderError('PapaParse library failed to load.');
+                return;
+            }
 
-                let patchMetaHTML = '';
-                if (app.PatchVersion && app.PatchVersion.trim() !== '') {
-                    patchMetaHTML = `<div class="card-meta-patch">Patch v${app.PatchVersion.trim()}</div>`;
+            Papa.parse(GOOGLE_SHEET_CSV_URL, {
+                download: true,
+                header: true,
+                skipEmptyLines: true,
+                complete: function (results) {
+                    processSheetData(results.data);
+                },
+                error: function (err) {
+                    console.error('Error fetching Google Sheet:', err);
+                    renderError('Failed to fetch data from Google Sheet. Make sure your Google Sheet is published to web as CSV.');
+                }
+            });
+        }
+
+        function processSheetData(rows) {
+            // Group rows by application ID or Title
+            let categoriesMap = {};
+            appsMap = {};
+
+            rows.forEach(row => {
+                const appKey = row.id || row.title;
+                if (!appKey) return;
+
+                const categoryName = row.category || 'General';
+
+                if (!appsMap[appKey]) {
+                    appsMap[appKey] = {
+                        id: appKey,
+                        title: row.title || 'Untitled App',
+                        package_name: row.package_name || '',
+                        version: row.version || '',
+                        description: row.description || '',
+                        icon_url: row.icon_url || '',
+                        patches_name: row.patches_name || '',
+                        patches_version: row.patches_version || '',
+                        patches_link: row.patches_link || '',
+                        ad_link: row.ad_link || '',
+                        download_count: parseInt(row.download_count) || 0,
+                        category: categoryName,
+                        variants: []
+                    };
                 }
 
-                const iconHTML = getIconHTML(app.IconLink);
+                // If variant columns exist in row
+                if (row.download_url || row.app_arch) {
+                    appsMap[appKey].variants.push({
+                        app_arch: row.app_arch || 'Universal',
+                        min_api: row.min_api || '',
+                        download_url: row.download_url || '',
+                        mirror_url: row.mirror_url || '',
+                        md5: row.md5 || '',
+                        sha256: row.sha256 || ''
+                    });
+                }
 
-                const cardHTML = `
-                    <section class="apk-card" onclick="openModal(${index})">
-                        <div class="card-header">
-                            <div class="card-icon-wrapper">
-                                ${iconHTML}
-                            </div>
-                            <div>
-                                <h3 class="card-title">${app.AppName}</h3>
-                                <div class="card-meta-container">
-                                    <div class="card-meta">v${app.Version}</div>
-                                    ${patchMetaHTML}
+                if (!categoriesMap[categoryName]) {
+                    categoriesMap[categoryName] = [];
+                }
+                if (!categoriesMap[categoryName].includes(appKey)) {
+                    categoriesMap[categoryName].push(appKey);
+                }
+            });
+
+            renderApps(categoriesMap);
+        }
+
+        function renderApps(categoriesMap) {
+            const container = document.getElementById('apps-container');
+            container.innerHTML = '';
+
+            const categories = Object.keys(categoriesMap);
+            if (categories.length === 0) {
+                renderError('No applications found in the spreadsheet.');
+                return;
+            }
+
+            categories.forEach(catName => {
+                const appKeys = categoriesMap[catName];
+
+                const catDiv = document.createElement('div');
+                catDiv.className = 'mb-12 category-section';
+
+                let cardsHtml = '';
+                appKeys.forEach(key => {
+                    const app = appsMap[key];
+                    const iconHtml = app.icon_url
+                        ? `<img src="${app.icon_url}" alt="${app.title} icon" class="w-12 h-12 rounded-xl object-cover bg-indigo-50 dark:bg-indigo-950/60 group-hover:scale-105 transition-transform duration-300 shrink-0 shadow-sm">`
+                        : `<div class="w-12 h-12 bg-indigo-50 dark:bg-indigo-950/60 p-2 rounded-xl text-indigo-600 dark:text-indigo-400 group-hover:scale-105 transition-transform duration-300 flex items-center justify-center font-bold text-xl shrink-0 shadow-sm">${app.title.substr(0, 1)}</div>`;
+
+                    cardsHtml += `
+                        <div onclick="openAppModal('${app.id}')" data-title="${app.title}" data-desc="${app.description || ''}" class="app-card group cursor-pointer bg-white dark:bg-slate-900/60 backdrop-blur-md border border-slate-200 dark:border-slate-800/80 rounded-2xl p-4 flex flex-col hover:scale-[1.02] hover:border-slate-300 dark:hover:border-slate-700/80 hover:shadow-md transition-all duration-300 relative overflow-hidden">
+                            <div class="flex items-start gap-3 mb-2">
+                                ${iconHtml}
+                                <div class="flex-1 min-w-0">
+                                    <h3 class="font-extrabold text-lg group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors text-slate-900 dark:text-slate-100 truncate">
+                                        ${app.title}
+                                    </h3>
+                                    <div class="flex items-center gap-1.5 mt-0.5">
+                                        ${app.version ? `<span class="text-xs font-bold text-slate-500 dark:text-slate-400">v${app.version}</span>` : ''}
+                                        ${app.package_name ? `<span class="text-xs text-slate-400 dark:text-slate-500 truncate">&bull; ${app.package_name}</span>` : ''}
+                                    </div>
                                 </div>
                             </div>
+                            
+                            ${app.description ? `<p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed font-medium line-clamp-2 mt-2">${app.description}</p>` : ''}
+                            
+                            <div class="mt-4 flex items-center justify-between text-xs font-bold text-slate-400 dark:text-slate-500">
+                                <div class="flex items-center gap-3">
+                                    <span>${app.variants.length} Variants</span>
+                                    ${app.download_count > 0 ? `
+                                        <span class="flex items-center gap-1">
+                                            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                            </svg>
+                                            ${app.download_count.toLocaleString()}
+                                        </span>
+                                    ` : ''}
+                                </div>
+                                <span class="text-indigo-500 dark:text-indigo-400 group-hover:translate-x-1 transition-transform inline-block">View Details &rarr;</span>
+                            </div>
                         </div>
-                    </section>
+                    `;
+                });
+
+                catDiv.innerHTML = `
+                    <div class="flex items-center gap-3 mb-8 px-2">
+                        <h2 class="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100">${catName}</h2>
+                        <span class="text-xs font-bold px-2.5 py-1 bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 rounded-lg">${appKeys.length}</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                        ${cardsHtml}
+                    </div>
                 `;
-                
-                container.innerHTML += cardHTML;
+
+                container.appendChild(catDiv);
             });
         }
 
-        function openModal(index) {
-            const app = parsedAppData[index];
-            if (!app) return;
+        function renderError(msg) {
+            const container = document.getElementById('apps-container');
+            container.innerHTML = `
+                <div class="text-center py-20 bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-3xl">
+                    <svg class="w-16 h-16 text-rose-500 mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+                    </svg>
+                    <h3 class="text-xl font-bold mb-1 text-slate-900 dark:text-slate-100">Unable to load data</h3>
+                    <p class="text-slate-500 dark:text-slate-400 max-w-md mx-auto">${msg}</p>
+                </div>
+            `;
+        }
 
-            const architectures = app.Architecture ? app.Architecture.split(',').map(s => s.trim()) : ['Universal'];
-            const directLinks = app.DownloadLink ? app.DownloadLink.split(',').map(s => s.trim()) : [];
-            const mirrorLinks = app.MirrorLink ? app.MirrorLink.split(',').map(s => s.trim()) : [];
-            const md5Hashes = app.MD5 ? app.MD5.split(',').map(s => s.trim()) : [];
-            const sha256Hashes = app.SHA256 ? app.SHA256.split(',').map(s => s.trim()) : [];
+        function filterApps() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const categories = document.querySelectorAll('.category-section');
+            let anyAppVisible = false;
 
-            let fileSectionsHTML = '';
+            categories.forEach(category => {
+                let hasVisibleCards = false;
+                const cards = category.querySelectorAll('.app-card');
 
-            architectures.forEach((arch, i) => {
-                let buttonsHTML = '';
-                let hashesHTML = '';
+                cards.forEach(card => {
+                    const title = (card.getAttribute('data-title') || '').toLowerCase();
+                    const desc = (card.getAttribute('data-desc') || '').toLowerCase();
 
-                if (directLinks[i]) {
-                    buttonsHTML += `<a href="${directLinks[i]}" class="download-btn btn-direct" target="_blank">${icons.download} ${locales[currentLang].directBtn}</a>`;
-                }
-                if (mirrorLinks[i]) {
-                    buttonsHTML += `<a href="${mirrorLinks[i]}" class="download-btn btn-mirror" target="_blank">${icons.mirror} ${locales[currentLang].mirrorBtn}</a>`;
-                }
+                    if (title.includes(query) || desc.includes(query)) {
+                        card.style.display = '';
+                        hasVisibleCards = true;
+                        anyAppVisible = true;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
 
-                let md5Block = md5Hashes[i] ? `<div class="hash-wrapper"><span class="hash-title">MD5 Checksum</span><div class="hash-value">${md5Hashes[i]}</div></div>` : '';
-                let sha256Block = sha256Hashes[i] ? `<div class="hash-wrapper"><span class="hash-title">SHA-256 Checksum</span><div class="hash-value">${sha256Hashes[i]}</div></div>` : '';
-
-                if (md5Block || sha256Block) hashesHTML = `<div class="hash-container">${md5Block}${sha256Block}</div>`;
-
-                fileSectionsHTML += `
-                    <div class="file-section">
-                        <div class="file-section-title">${icons.device} ${locales[currentLang].variant} ${arch}</div>
-                        <div class="card-actions">${buttonsHTML}</div>
-                        ${hashesHTML}
-                    </div>
-                `;
+                category.style.display = hasVisibleCards ? '' : 'none';
             });
 
-            let supportButtonHTML = app.AdLink && app.AdLink.trim() ? `<a href="${app.AdLink.trim()}" class="download-btn btn-ad" target="_blank">${icons.heart} ${locales[currentLang].supportBtn}</a>` : '';
-            let patchMetaHTML = app.PatchVersion && app.PatchVersion.trim() ? `<div class="card-meta-patch">Patch v${app.PatchVersion.trim()}</div>` : '';
+            let noAppsMsg = document.getElementById('no-search-results');
+            if (anyAppVisible) {
+                if (noAppsMsg) noAppsMsg.style.display = 'none';
+            } else {
+                if (!noAppsMsg) {
+                    noAppsMsg = document.createElement('div');
+                    noAppsMsg.id = 'no-search-results';
+                    noAppsMsg.className = 'text-center py-12';
+                    noAppsMsg.innerHTML = '<p class="text-slate-500 dark:text-slate-400 font-medium">No applications match your search query.</p>';
+                    const container = document.getElementById('apps-container');
+                    container.appendChild(noAppsMsg);
+                }
+                noAppsMsg.style.display = 'block';
+            }
+        }
 
-            const iconHTML = getIconHTML(app.IconLink);
+        function openAppModal(id) {
+            const app = appsMap[id];
+            if (!app) return;
 
-            const modalContent = `
-                <button class="modal-close-btn" onclick="closeModalForce()">✕</button>
-                <div class="card-header">
-                    <div class="card-icon-wrapper">
-                        ${iconHTML}
-                    </div>
-                    <div>
-                        <h3 class="card-title">${app.AppName}</h3>
-                        <div class="card-meta-container">
-                            <div class="card-meta">v${app.Version}</div>
-                            ${patchMetaHTML}
-                        </div>
-                    </div>
-                </div>
-                <p class="card-body-text">${app.Description || ''}</p>
-                ${fileSectionsHTML}
-                ${supportButtonHTML}
-            `;
+            // Populate Icon
+            const iconContainer = document.getElementById('modal-icon-container');
+            if (app.icon_url) {
+                iconContainer.innerHTML = `<img src="${app.icon_url}" alt="${app.title} icon" class="w-14 h-14 rounded-2xl object-cover bg-indigo-50 dark:bg-indigo-950/60 shadow-sm border border-slate-100 dark:border-slate-800 shrink-0">`;
+            } else {
+                iconContainer.innerHTML = `<div class="w-14 h-14 bg-indigo-50 dark:bg-indigo-950/60 p-2 rounded-2xl text-indigo-600 dark:text-indigo-400 flex items-center justify-center font-bold text-2xl shrink-0 shadow-sm border border-indigo-100 dark:border-indigo-900/40">${app.title.substr(0, 1)}</div>`;
+            }
 
-            document.getElementById('modal-card-content').innerHTML = modalContent;
-            document.getElementById('app-modal').classList.add('active');
+            // Populate Title, Package Name, Version
+            document.getElementById('modal-title').innerText = app.title;
+            document.getElementById('modal-package-name').innerText = app.package_name || '';
+
+            const versionBadge = document.getElementById('modal-version-badge');
+            if (app.version) {
+                versionBadge.innerText = `v${app.version}`;
+                versionBadge.classList.remove('hidden');
+            } else {
+                versionBadge.classList.add('hidden');
+            }
+
+            // Populate Description
+            const descEl = document.getElementById('modal-description');
+            if (app.description) {
+                descEl.innerText = app.description;
+                descEl.classList.remove('hidden');
+            } else {
+                descEl.classList.add('hidden');
+            }
+
+            // Populate Patches Section
+            const patchesSection = document.getElementById('modal-patches-section');
+            if (app.patches_name || app.patches_version) {
+                document.getElementById('modal-patches-name').innerText = app.patches_name || '';
+
+                const patchVerBadge = document.getElementById('modal-patches-version');
+                if (app.patches_version) {
+                    patchVerBadge.innerText = `v${app.patches_version}`;
+                    patchVerBadge.classList.remove('hidden');
+                } else {
+                    patchVerBadge.classList.add('hidden');
+                }
+
+                const patchSourceLink = document.getElementById('modal-patches-source');
+                if (app.patches_link) {
+                    patchSourceLink.href = app.patches_link;
+                    patchSourceLink.classList.remove('hidden');
+                } else {
+                    patchSourceLink.classList.add('hidden');
+                }
+
+                patchesSection.classList.remove('hidden');
+            } else {
+                patchesSection.classList.add('hidden');
+            }
+
+            // Populate Variants
+            const variantsContainer = document.getElementById('modal-variants-container');
+            variantsContainer.innerHTML = '';
+
+            if (app.variants && app.variants.length > 0) {
+                app.variants.forEach(variant => {
+                    const variantDiv = document.createElement('div');
+                    variantDiv.className = 'bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/60 rounded-xl p-4 transition-colors';
+
+                    let headerHtml = '';
+                    if (variant.app_arch) {
+                        const minApiHtml = variant.min_api ? `<span class="mx-1 opacity-50">&bull;</span> Android ${variant.min_api}+` : '';
+                        headerHtml = `
+                            <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                                <span class="text-xs font-extrabold tracking-wider text-slate-600 dark:text-slate-300 uppercase flex items-center gap-1.5">
+                                    <svg class="w-4 h-4 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                    </svg>
+                                    ${variant.app_arch} 
+                                    ${minApiHtml}
+                                </span>
+                            </div>
+                        `;
+                    }
+
+                    let buttonsHtml = '<div class="flex flex-wrap gap-2">';
+                    if (variant.download_url) {
+                        buttonsHtml += `
+                            <a href="${variant.download_url}" target="_blank" rel="noopener noreferrer" class="flex-1 min-w-[120px] flex items-center justify-center gap-2 py-2 px-4 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-sm font-bold transition shadow-sm">
+                                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                </svg>
+                                Download
+                            </a>
+                        `;
+                    }
+                    if (variant.mirror_url) {
+                        buttonsHtml += `
+                            <a href="${variant.mirror_url}" target="_blank" rel="noopener noreferrer" class="flex-1 min-w-[120px] flex items-center justify-center gap-2 py-2 px-4 bg-white dark:bg-slate-700 hover:bg-slate-50 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-600 rounded-lg text-sm font-bold transition shadow-sm">
+                                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z" />
+                                </svg>
+                                Mirror
+                            </a>
+                        `;
+                    }
+                    buttonsHtml += '</div>';
+
+                    let hashHtml = '';
+                    if (variant.md5 || variant.sha256) {
+                        hashHtml = '<div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3 text-[10px] font-medium text-slate-500 dark:text-slate-400">';
+                        if (variant.md5) {
+                            hashHtml += `
+                                <div class="flex flex-col gap-1">
+                                    <span class="uppercase tracking-wide font-bold">MD5</span>
+                                    <div onclick="copyText('${variant.md5}', this.querySelector('.copy-btn'))" class="flex items-center justify-between p-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg cursor-pointer hover:border-indigo-300 dark:hover:border-indigo-700 transition-colors group/copy">
+                                        <code class="font-mono text-slate-700 dark:text-slate-300 truncate pr-2 select-all">${variant.md5}</code>
+                                        <span class="copy-btn text-indigo-500 font-bold shrink-0 opacity-0 group-hover/copy:opacity-100 transition-opacity">Copy</span>
+                                    </div>
+                                </div>
+                            `;
+                        }
+                        if (variant.sha256) {
+                            hashHtml += `
+                                <div class="flex flex-col gap-1">
+                                    <span class="uppercase tracking-wide font-bold">SHA-256</span>
+                                    <div onclick="copyText('${variant.sha256}', this.querySelector('.copy-btn'))" class="flex items-center justify-between p-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg cursor-pointer hover:border-indigo-300 dark:hover:border-indigo-700 transition-colors group/copy">
+                                        <code class="font-mono text-slate-700 dark:text-slate-300 truncate pr-2 select-all">${variant.sha256}</code>
+                                        <span class="copy-btn text-indigo-500 font-bold shrink-0 opacity-0 group-hover/copy:opacity-100 transition-opacity">Copy</span>
+                                    </div>
+                                </div>
+                            `;
+                        }
+                        hashHtml += '</div>';
+                    }
+
+                    variantDiv.innerHTML = headerHtml + buttonsHtml + hashHtml;
+                    variantsContainer.appendChild(variantDiv);
+                });
+            }
+
+            // Populate Ad Link
+            const adLinkContainer = document.getElementById('modal-ad-link-container');
+            if (app.ad_link) {
+                adLinkContainer.innerHTML = `
+                    <a href="${app.ad_link}" target="_blank" rel="noopener noreferrer" class="w-full flex items-center justify-center gap-2 py-3 bg-rose-50 hover:bg-rose-100 dark:bg-rose-950/30 dark:hover:bg-rose-900/40 text-rose-600 dark:text-rose-400 rounded-xl text-sm font-bold transition-all duration-300">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
+                        </svg>
+                        Support the Developer
+                    </a>
+                `;
+                adLinkContainer.classList.remove('hidden');
+            } else {
+                adLinkContainer.innerHTML = '';
+                adLinkContainer.classList.add('hidden');
+            }
+
+            // Show Modal
+            const modal = document.getElementById('app-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            void modal.offsetWidth;
+
+            const backdrop = modal.querySelector('.modal-backdrop');
+            const content = modal.querySelector('.modal-content');
+            if (backdrop) backdrop.classList.replace('opacity-0', 'opacity-100');
+            if (content) {
+                content.classList.replace('opacity-0', 'opacity-100');
+                content.classList.replace('scale-95', 'scale-100');
+            }
             document.body.style.overflow = 'hidden';
         }
 
-        function closeModal(e) {
-            if (e.target.id === 'app-modal') {
-                closeModalForce();
-            }
-        }
+        function closeAppModal() {
+            const modal = document.getElementById('app-modal');
+            if (!modal) return;
+            const backdrop = modal.querySelector('.modal-backdrop');
+            const content = modal.querySelector('.modal-content');
 
-        function closeModalForce() {
-            document.getElementById('app-modal').classList.remove('active');
+            if (backdrop) backdrop.classList.replace('opacity-100', 'opacity-0');
+            if (content) {
+                content.classList.replace('opacity-100', 'opacity-0');
+                content.classList.replace('scale-100', 'scale-95');
+            }
             document.body.style.overflow = '';
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }, 300);
         }
 
-        updateStaticText();
-        document.getElementById('loading').innerText = locales[currentLang].loading;
-
-        Papa.parse(sheetUrl, {
-            download: true,
-            header: true,
-            complete: function(results) {
-                document.getElementById('loading').style.display = 'none';
-                parsedAppData = results.data;
-                renderCards(parsedAppData);
-            },
-            error: function(err) {
-                document.getElementById('loading').innerText = locales[currentLang].error;
-                console.error(err);
-            }
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') closeAppModal();
         });
+
+        // Initialize fetching data
+        window.addEventListener('DOMContentLoaded', loadDataFromGoogleSheet);
     </script>
 </body>
+
 </html>
